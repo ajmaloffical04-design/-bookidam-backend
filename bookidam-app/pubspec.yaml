@@ -1,0 +1,25 @@
+name: bookidam
+description: "BOOKIDAM – Event & Programme Booking App"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  google_fonts: ^6.1.0 # SF Pro alternative / Inter for clean look
+  http: ^1.1.2 # for API calls
+  intl: ^0.19.0 # formating dates and currency
+  image_picker: ^1.0.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true

@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #09090b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #09090b;
+    --foreground: #ededed;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Utilities for Premium Look */
+.glass-nav {
+  @apply bg-white/80 backdrop-blur-md border-b border-gray-100;
+}
+
+.premium-shadow {
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+}
+
+.hover-lift {
+  @apply transition-transform overflow-visible duration-300 ease-in-out hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/10;
+}
