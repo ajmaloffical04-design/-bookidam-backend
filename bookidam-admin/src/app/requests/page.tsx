@@ -3,7 +3,7 @@ import { Search, Filter, MoreVertical, Eye, CheckCircle, XCircle } from "lucide-
 
 async function getBookings() {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+    const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000').replace(/\/$/, '');
     const res = await fetch(`${apiUrl}/api/bookings`, { cache: 'no-store' });
     const data = await res.json();
     return data.data || [];

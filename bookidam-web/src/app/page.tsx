@@ -3,7 +3,7 @@ import { ArrowRight, MapPin, Calendar, Search, Sparkles } from "lucide-react";
 
 async function getFeaturedEvents() {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const apiUrl = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000").replace(/\/$/, "");
     const res = await fetch(`${apiUrl}/api/events`, { next: { revalidate: 10 } });
     if (!res.ok) return [];
     const json = await res.json();

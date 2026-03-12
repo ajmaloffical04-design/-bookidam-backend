@@ -29,7 +29,7 @@ export default function BookEvent() {
     setLoading(true);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const apiUrl = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000").replace(/\/$/, "");
       const res = await fetch(`${apiUrl}/api/bookings`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

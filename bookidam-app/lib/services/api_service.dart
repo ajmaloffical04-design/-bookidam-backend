@@ -7,9 +7,8 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 class ApiService {
   // Use 10.0.2.2 for Android Emulator, localhost for iOS Sim/Web.
   static String get baseUrl {
-    if (kIsWeb) return 'http://localhost:5000/api';
-    if (Platform.isAndroid) return 'http://10.0.2.2:5000/api';
-    return 'http://localhost:5000/api';
+    if (kIsWeb) return 'https://bookidam-backend.onrender.com/api';
+    return 'https://bookidam-backend.onrender.com/api';
   }
 
   static Future<List<EventModel>> fetchEvents() async {

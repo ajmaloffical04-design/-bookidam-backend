@@ -3,7 +3,8 @@ import { Search, Plus, Calendar, MapPin, MoreVertical } from "lucide-react";
 
 async function getEvents() {
   try {
-    const res = await fetch('http://localhost:5000/api/events', { cache: 'no-store' });
+    const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000').replace(/\/$/, '');
+    const res = await fetch(`${apiUrl}/api/events`, { cache: 'no-store' });
     const data = await res.json();
     return data.data || [];
   } catch (error) {

@@ -3,7 +3,8 @@ import { ArrowRight, Clock, CheckCircle, XCircle } from "lucide-react";
 
 async function getStats() {
   try {
-    const res = await fetch('http://localhost:5000/api/bookings', { cache: 'no-store' });
+    const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000').replace(/\/$/, '');
+    const res = await fetch(`${apiUrl}/api/bookings`, { cache: 'no-store' });
     const data = await res.json();
     const bookings = data.data || [];
     
