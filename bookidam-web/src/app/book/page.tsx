@@ -1,12 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function BookEvent() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true);
   const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    const auth = localStorage.getItem("bookidam_auth");
+    if (!auth) {
+      router.push("/login?callback=/book");
+    } else {
+      setCheckingAuth(false);
+    }
+  }, [router]);
+
   const [formData, setFormData] = useState({
     clientName: "",
     phone: "",
@@ -48,6 +61,14 @@ export default function BookEvent() {
       setLoading(false);
     }
   };
+
+  if (checkingAuth) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center">
+        <div className="w-10 h-10 border-4 border-green-500/20 border-t-green-500 rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   if (success) {
     return (
