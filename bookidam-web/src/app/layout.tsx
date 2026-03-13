@@ -51,7 +51,8 @@ export default function RootLayout({
             <div>
               <h4 className="font-semibold text-gray-900 mb-4">Company</h4>
               <ul className="space-y-3">
-                <li><Link href="#" className="text-sm text-gray-500 hover:text-green-600 transition">About Us</Link></li>
+                <li><Link href="/about" className="text-sm text-gray-500 hover:text-green-600 transition">About Us</Link></li>
+                <li><Link href="/contact" className="text-sm text-gray-500 hover:text-green-600 transition">Contact</Link></li>
                 <li><Link href="#" className="text-sm text-gray-500 hover:text-green-600 transition">Careers</Link></li>
                 <li><Link href="#" className="text-sm text-gray-500 hover:text-green-600 transition">Privacy Policy</Link></li>
                 <li><Link href="#" className="text-sm text-gray-500 hover:text-green-600 transition">Terms of Service</Link></li>

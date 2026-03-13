@@ -41,10 +41,10 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="#" className="text-sm font-medium text-gray-600 hover:text-green-600 transition">Events</Link>
-          <Link href="#" className="text-sm font-medium text-gray-600 hover:text-green-600 transition">Venues</Link>
-          <Link href="#" className="text-sm font-medium text-gray-600 hover:text-green-600 transition">About</Link>
-          <Link href="#" className="text-sm font-medium text-gray-600 hover:text-green-600 transition">Contact</Link>
+          <Link href="/" className="text-sm font-medium text-gray-600 hover:text-green-600 transition">Events</Link>
+          <Link href="/" className="text-sm font-medium text-gray-600 hover:text-green-600 transition">Venues</Link>
+          <Link href="/about" className="text-sm font-medium text-gray-600 hover:text-green-600 transition">About</Link>
+          <Link href="/contact" className="text-sm font-medium text-gray-600 hover:text-green-600 transition">Contact</Link>
         </nav>
 
         {/* Actions */}
