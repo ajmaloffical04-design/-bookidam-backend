@@ -1,11 +1,7 @@
+"use client";
+
 import { MapPin, Calendar, Heart, Shield, Users, Mail, Phone, Clock } from "lucide-react";
 import Link from "next/link";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Contact Us | BOOKIDAM",
-  description: "Get in touch with the BOOKIDAM team for any event planning inquiries or support.",
-};
 
 export default function ContactPage() {
   return (
