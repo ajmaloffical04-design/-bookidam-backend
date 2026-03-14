@@ -1,10 +1,7 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
 import { LayoutDashboard, Calendar, FileText, Settings, Users } from 'lucide-react';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'BOOKIDAM Admin',
@@ -18,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gray-50 flex h-screen overflow-hidden`}>
+      <body className={`font-sans bg-gray-50 flex h-screen overflow-hidden`}>
         {/* Sidebar */}
         <aside className="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col">
           <div className="p-6 border-b border-gray-200">

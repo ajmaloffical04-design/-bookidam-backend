@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro", "v-sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --color-primary-50: #e5f4ff;
   --color-primary-100: #cce9ff;
   --color-primary-200: #99d3ff;

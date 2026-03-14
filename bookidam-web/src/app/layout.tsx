@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
 import Navbar from "@/components/Navbar";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-
 export const metadata: Metadata = {
   title: "BOOKIDAM | Event & Programme Booking",
   description: "Book any event. We handle the rest. The best platform to discover and coordinate premium events.",
@@ -19,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans bg-gray-50/50 min-h-screen flex flex-col`}>
+      <body className={`font-sans bg-gray-50/50 min-h-screen flex flex-col`}>
         <Navbar />
         <main className="flex-grow pt-20">
           {children}

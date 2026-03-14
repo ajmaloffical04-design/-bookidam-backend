@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Colors
@@ -19,21 +18,20 @@ class AppTheme {
         secondary: accentLightBlue,
         surface: secondaryWhite,
       ),
-      // Using Google Fonts closely mirroring SF Pro
-      textTheme: GoogleFonts.interTextTheme().copyWith(
-        displayLarge: GoogleFonts.inter(
+      textTheme: const TextTheme(
+        displayLarge: TextStyle(
           color: textColor,
           fontWeight: FontWeight.bold,
         ),
-        bodyLarge: GoogleFonts.inter(color: textColor),
-        bodyMedium: GoogleFonts.inter(color: textColor),
+        bodyLarge: TextStyle(color: textColor),
+        bodyMedium: TextStyle(color: textColor),
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: secondaryWhite,
         elevation: 0,
         centerTitle: false,
         iconTheme: const IconThemeData(color: primaryBlue),
-        titleTextStyle: GoogleFonts.inter(
+        titleTextStyle: const TextStyle(
           color: primaryBlue,
           fontSize: 22,
           fontWeight: FontWeight.w700,
@@ -49,7 +47,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: GoogleFonts.inter(
+          textStyle: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -71,7 +69,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: primaryBlue, width: 2),
         ),
-        hintStyle: GoogleFonts.inter(color: textLightColor),
+        hintStyle: const TextStyle(color: textLightColor),
       ),
     );
   }
