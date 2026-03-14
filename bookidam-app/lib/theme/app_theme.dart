@@ -3,20 +3,20 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Colors
-  static const Color primaryGreen = Color(0xFF1E8449);
+  static const Color primaryBlue = Color(0xFF0091FF);
   static const Color secondaryWhite = Color(0xFFFFFFFF);
-  static const Color accentLightGreen = Color(0xFFE8F6F3);
-  static const Color backgroundColor = Color(0xFFF8F9FA);
-  static const Color textColor = Color(0xFF2C3E50);
-  static const Color textLightColor = Color(0xFF7F8C8D);
+  static const Color accentLightBlue = Color(0xFFE5F4FF);
+  static const Color backgroundColor = Color(0xFFF8FAF9);
+  static const Color textColor = Color(0xFF09090B);
+  static const Color textLightColor = Color(0xFF71717A);
 
   static ThemeData get lightTheme {
     return ThemeData(
-      primaryColor: primaryGreen,
+      primaryColor: primaryBlue,
       scaffoldBackgroundColor: backgroundColor,
       colorScheme: ColorScheme.light(
-        primary: primaryGreen,
-        secondary: accentLightGreen,
+        primary: primaryBlue,
+        secondary: accentLightBlue,
         surface: secondaryWhite,
       ),
       // Using Google Fonts closely mirroring SF Pro
@@ -32,9 +32,9 @@ class AppTheme {
         backgroundColor: secondaryWhite,
         elevation: 0,
         centerTitle: false,
-        iconTheme: const IconThemeData(color: primaryGreen),
+        iconTheme: const IconThemeData(color: primaryBlue),
         titleTextStyle: GoogleFonts.inter(
-          color: primaryGreen,
+          color: primaryBlue,
           fontSize: 22,
           fontWeight: FontWeight.w700,
           letterSpacing: -0.5,
@@ -42,7 +42,7 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: primaryGreen,
+          backgroundColor: primaryBlue,
           foregroundColor: secondaryWhite,
           elevation: 2,
           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -65,11 +65,11 @@ class AppTheme {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFFEEEEEE)),
+          borderSide: const BorderSide(color: Color(0xFFE4E4E7)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: primaryGreen, width: 2),
+          borderSide: const BorderSide(color: primaryBlue, width: 2),
         ),
         hintStyle: GoogleFonts.inter(color: textLightColor),
       ),

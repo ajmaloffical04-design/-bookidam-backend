@@ -29,7 +29,7 @@ export default async function Dashboard() {
           <h2 className="text-3xl font-bold text-gray-900">Dashboard Overview</h2>
           <p className="text-gray-500 mt-1">Welcome back. Here's what's happening today.</p>
         </div>
-        <Link href="/events/new" className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition shadow-sm">
+        <Link href="/events/new" className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition shadow-sm">
           + Create Event
         </Link>
       </div>
@@ -59,7 +59,7 @@ export default async function Dashboard() {
             <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">Completed Events</p>
             <p className="text-3xl font-bold text-gray-900 mt-2">{stats.completed}</p>
           </div>
-          <div className="w-12 h-12 bg-green-50 text-green-600 rounded-full flex items-center justify-center">
+          <div className="w-12 h-12 bg-primary-50 text-primary-600 rounded-full flex items-center justify-center">
             <CheckCircle size={24} />
           </div>
         </div>
@@ -69,7 +69,7 @@ export default async function Dashboard() {
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
         <div className="px-6 py-5 border-b border-gray-200 flex justify-between items-center">
           <h3 className="text-lg font-bold text-gray-900">Recent Booking Requests</h3>
-          <Link href="/requests" className="text-sm font-medium text-green-600 hover:text-green-700 flex items-center">
+          <Link href="/requests" className="text-sm font-medium text-primary-600 hover:text-primary-700 flex items-center">
             View all <ArrowRight size={16} className="ml-1" />
           </Link>
         </div>

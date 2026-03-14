@@ -32,7 +32,7 @@ export default async function RequestsPage() {
             <input 
               type="text" 
               placeholder="Search clients or events..." 
-              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent w-64"
+              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent w-64"
             />
           </div>
           <div className="flex space-x-2">
@@ -79,7 +79,7 @@ export default async function RequestsPage() {
                         {booking.eventName || "No specific name"}
                       </div>
                       {booking.imageUrl && (
-                        <div className="text-xs text-green-600 mt-1 font-medium truncate max-w-[200px]">
+                        <div className="text-xs text-primary-600 mt-1 font-medium truncate max-w-[200px]">
                           <a href={booking.imageUrl} target="_blank" rel="noreferrer">Attached Image →</a>
                         </div>
                       )}
@@ -95,14 +95,14 @@ export default async function RequestsPage() {
                       <span className={`px-3 py-1 text-xs font-semibold rounded-full 
                         ${booking.status === 'Pending' ? 'bg-amber-100 text-amber-800' : 
                           booking.status === 'Approved' ? 'bg-blue-100 text-blue-800' : 
-                          booking.status === 'Completed' ? 'bg-green-100 text-green-800' : 
+                          booking.status === 'Completed' ? 'bg-primary-100 text-primary-800' : 
                           'bg-red-100 text-red-800'}`}>
                         {booking.status}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex items-center justify-end space-x-3">
-                        <button className="text-gray-400 hover:text-green-600 transition" title="View Details">
+                        <button className="text-gray-400 hover:text-primary-600 transition" title="View Details">
                           <Eye size={18} />
                         </button>
                         <button className="text-gray-400 hover:text-blue-600 transition" title="Approve">

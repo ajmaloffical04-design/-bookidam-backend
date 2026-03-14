@@ -72,7 +72,7 @@ export default function NewEvent() {
                   value={formData.title}
                   onChange={handleChange}
                   placeholder="e.g. Summer Football Bash" 
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 />
               </div>
               
@@ -82,7 +82,7 @@ export default function NewEvent() {
                   name="type"
                   value={formData.type}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900"
                 >
                   <option value="Tournament">Tournament</option>
                   <option value="Music Show">Music Show</option>
@@ -104,7 +104,7 @@ export default function NewEvent() {
                       required
                       value={formData.date}
                       onChange={handleChange}
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900"
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900"
                     />
                   </div>
                 </div>
@@ -119,7 +119,7 @@ export default function NewEvent() {
                       value={formData.location}
                       onChange={handleChange}
                       placeholder="City, Venue"
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
                   </div>
                 </div>
@@ -138,7 +138,7 @@ export default function NewEvent() {
                   value={formData.description}
                   onChange={handleChange}
                   placeholder="Provide details about the event..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
                 />
               </div>
 
@@ -152,7 +152,7 @@ export default function NewEvent() {
                   value={formData.imageUrl}
                   onChange={handleChange}
                   placeholder="https://example.com/image.jpg"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                 />
                 <p className="text-xs text-gray-500 mt-2">Optional: For now, insert a direct URL to an image. Later, we can add a file uploader.</p>
               </div>
@@ -172,7 +172,7 @@ export default function NewEvent() {
             <button 
               type="submit" 
               disabled={loading}
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-2.5 rounded-lg font-medium transition shadow-sm disabled:opacity-70 flex items-center"
+              className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-2.5 rounded-lg font-medium transition shadow-sm disabled:opacity-70 flex items-center"
             >
               {loading ? "Publishing..." : "Publish Event"}
             </button>

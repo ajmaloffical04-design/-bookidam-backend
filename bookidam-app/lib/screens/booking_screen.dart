@@ -78,7 +78,7 @@ class _BookingScreenState extends State<BookingScreen> {
           context: context,
           builder: (ctx) => AlertDialog(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            title: const Text('Booking Received!', style: TextStyle(color: AppTheme.primaryGreen)),
+            title: const Text('Booking Received!', style: TextStyle(color: AppTheme.primaryBlue)),
             content: const Text('We have successfully received your booking request. Our team will contact you shortly to confirm the details.'),
             actions: [
               TextButton(
@@ -94,7 +94,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   _budgetController.clear();
                   _descController.clear();
                 },
-                child: const Text('Close', style: TextStyle(color: AppTheme.primaryGreen)),
+                child: const Text('Close', style: TextStyle(color: AppTheme.primaryBlue)),
               ),
             ],
           ),

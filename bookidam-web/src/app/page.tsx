@@ -21,12 +21,12 @@ export default async function Home() {
       
       {/* Dynamic Hero Section */}
       <section className="relative w-full min-h-[85vh] flex items-center justify-center p-6 md:p-12 mt-4 md:mt-8">
-        <div className="absolute inset-x-0 bottom-0 top-0 mx-auto max-w-7xl rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-green-900 to-green-800">
+        <div className="absolute inset-x-0 bottom-0 top-0 mx-auto max-w-7xl rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary-900 to-primary-800">
           {/* Background Image / Texture overlay */}
           <div className="absolute inset-0 opacity-40 mix-blend-overlay bg-[url('https://images.unsplash.com/photo-1540039155732-68473668f4ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center"></div>
           
           {/* Gradient masking */}
-          <div className="absolute inset-0 bg-gradient-to-t from-green-900/90 via-transparent to-black/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-900/90 via-transparent to-black/30"></div>
         </div>
 
         <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center text-center">
@@ -36,10 +36,10 @@ export default async function Home() {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
-            Book Your Next <br/> <span className="text-green-300">Unforgettable Event</span>
+            Book Your Next <br/> <span className="text-primary-300">Unforgettable Event</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-green-50 max-w-2xl font-light mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-primary-50 max-w-2xl font-light mb-10 leading-relaxed">
             From exclusive music shows to local tournaments, find and book the best experiences in your city. We handle the coordination, you make the memories.
           </p>
 
@@ -53,7 +53,7 @@ export default async function Home() {
               <MapPin className="text-gray-400 mr-3" size={20} />
               <input type="text" placeholder="Any location" className="w-full focus:outline-none text-gray-900 placeholder:text-gray-400 bg-transparent" />
             </div>
-            <button className="w-full md:w-auto px-8 py-4 md:py-3 bg-green-600 hover:bg-green-700 transition text-white font-semibold rounded-xl md:rounded-full whitespace-nowrap">
+            <button className="w-full md:w-auto px-8 py-4 md:py-3 bg-primary-600 hover:bg-primary-700 transition text-white font-semibold rounded-xl md:rounded-full whitespace-nowrap">
               Search
             </button>
           </div>
@@ -67,8 +67,8 @@ export default async function Home() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {["Tournaments", "Music", "Weddings", "Conferences", "Exhibitions", "Comedy"].map((cat, i) => (
-            <div key={i} className="bg-white rounded-2xl p-6 flex flex-col items-center justify-center gap-4 cursor-pointer hover-lift border border-gray-100 text-center">
-              <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-600">
+            <div key={i} className="liquid-glass rounded-2xl p-6 flex flex-col items-center justify-center gap-4 cursor-pointer hover-lift border border-gray-100 text-center">
+              <div className="w-12 h-12 rounded-full bg-primary-50 flex items-center justify-center text-primary-600">
                 <Sparkles size={24} />
               </div>
               <span className="font-semibold text-gray-800 text-sm">{cat}</span>
@@ -85,19 +85,19 @@ export default async function Home() {
               <h2 className="text-3xl font-bold text-gray-900 tracking-tight mb-2">Trending Events</h2>
               <p className="text-gray-500">Discover the most popular events happening near you.</p>
             </div>
-            <Link href="/events" className="flex items-center gap-1 text-green-600 font-semibold hover:text-green-700 group transition">
+            <Link href="/events" className="flex items-center gap-1 text-primary-600 font-semibold hover:text-primary-700 group transition">
               View all <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
 
           {events.length === 0 ? (
             <div className="w-full rounded-3xl bg-gray-50 border border-gray-100 p-16 text-center flex flex-col items-center justify-center">
-              <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 text-green-600 border border-gray-100">
+              <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 text-primary-600 border border-gray-100">
                 <Calendar size={28} />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">No events scheduled</h3>
               <p className="text-gray-500 max-w-md">There are currently no featured events available. Please check back later or start planning your own event!</p>
-              <Link href="/book" className="mt-8 px-6 py-3 bg-green-600 text-white font-medium rounded-full shadow-sm hover:bg-green-700 transition">
+              <Link href="/book" className="mt-8 px-6 py-3 bg-primary-600 text-white font-medium rounded-full shadow-sm hover:bg-primary-700 transition">
                 Plan an Event
               </Link>
             </div>
@@ -105,7 +105,7 @@ export default async function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {events.map((evt: any) => (
                 <Link href={`/events/${evt.id}`} key={evt.id} className="group block h-full">
-                  <div className="bg-white rounded-3xl overflow-hidden hover-lift border border-gray-100 h-full flex flex-col relative">
+                  <div className="rounded-3xl overflow-hidden hover-lift liquid-glass border-none h-full flex flex-col relative">
                     {/* Image Area */}
                     <div className="relative h-60 w-full overflow-hidden bg-gray-100">
                       {evt.imageUrl ? (
@@ -131,19 +131,19 @@ export default async function Home() {
                     
                     {/* Content */}
                     <div className="p-6 flex flex-col flex-grow">
-                      <h3 className="text-xl font-bold text-gray-900 mb-4 line-clamp-2 leading-tight group-hover:text-green-600 transition-colors">
+                      <h3 className="text-xl font-bold text-gray-900 mb-4 line-clamp-2 leading-tight group-hover:text-primary-600 transition-colors">
                         {evt.title}
                       </h3>
                       
                       <div className="mt-auto space-y-3">
                         <div className="flex items-center text-gray-600 text-sm">
-                          <Calendar size={16} className="mr-3 text-green-600 flex-shrink-0" />
+                          <Calendar size={16} className="mr-3 text-primary-600 flex-shrink-0" />
                           <span className="truncate">
                             {new Date(evt.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                           </span>
                         </div>
                         <div className="flex items-center text-gray-600 text-sm">
-                          <MapPin size={16} className="mr-3 text-green-600 flex-shrink-0" />
+                          <MapPin size={16} className="mr-3 text-primary-600 flex-shrink-0" />
                           <span className="truncate">{evt.location}</span>
                         </div>
                       </div>
@@ -158,17 +158,17 @@ export default async function Home() {
 
       {/* CTA Section */}
       <section className="py-24 px-6">
-        <div className="max-w-5xl mx-auto bg-green-900 rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden">
+        <div className="max-w-5xl mx-auto bg-primary-900 rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden">
           {/* Decorative circles */}
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-green-800 rounded-full blur-3xl opacity-50"></div>
-          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-green-700 rounded-full blur-3xl opacity-50"></div>
+          <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary-800 rounded-full blur-3xl opacity-50"></div>
+          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-primary-700 rounded-full blur-3xl opacity-50"></div>
           
           <div className="relative z-10 flex flex-col items-center">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Need a custom event?</h2>
-            <p className="text-green-100 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+            <p className="text-primary-100 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
               From corporate seminars to grand weddings, let BOOKIDAM handle all the heavy lifting. Tell us what you need, and our expert coordinators will bring it to life.
             </p>
-            <Link href="/book" className="px-8 py-4 bg-white text-green-900 font-bold rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+            <Link href="/book" className="px-8 py-4 bg-white text-primary-900 font-bold rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
               Start Planning Now
             </Link>
           </div>

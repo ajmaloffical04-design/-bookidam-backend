@@ -65,7 +65,7 @@ export default function BookEvent() {
   if (checkingAuth) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-green-500/20 border-t-green-500 rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-primary-500/20 border-t-primary-500 rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -73,15 +73,15 @@ export default function BookEvent() {
   if (success) {
     return (
       <div className="min-h-[80vh] flex items-center justify-center p-6">
-        <div className="max-w-md w-full bg-white rounded-3xl p-10 text-center premium-shadow border border-gray-100">
-          <div className="w-20 h-20 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+        <div className="max-w-md w-full rounded-3xl p-10 text-center liquid-glass">
+          <div className="w-20 h-20 bg-primary-50 text-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 size={40} />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-3">Booking Received!</h2>
           <p className="text-gray-500 mb-8 leading-relaxed">
             Thank you for reaching out. Our team of expert coordinators will review your request and contact you shortly to confirm the details.
           </p>
-          <Link href="/" className="inline-flex items-center justify-center w-full px-6 py-3 bg-green-600 text-white font-medium rounded-full hover:bg-green-700 transition">
+          <Link href="/" className="inline-flex items-center justify-center w-full px-6 py-3 bg-primary-600 text-white font-medium rounded-full hover:bg-primary-700 transition">
             Back to Home
           </Link>
         </div>
@@ -92,8 +92,8 @@ export default function BookEvent() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-12 md:py-24">
       <div className="text-center mb-16">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-100 text-green-700 text-sm font-medium mb-6">
-          <Sparkles size={16} className="text-green-600" />
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 border border-primary-100 text-primary-700 text-sm font-medium mb-6">
+          <Sparkles size={16} className="text-primary-600" />
           <span>Concierge Service</span>
         </div>
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight mb-4">
@@ -104,30 +104,30 @@ export default function BookEvent() {
         </p>
       </div>
 
-      <div className="bg-white rounded-[2rem] p-8 md:p-12 premium-shadow border border-gray-100 relative overflow-hidden">
+      <div className="rounded-[2rem] p-8 md:p-12 liquid-glass relative overflow-hidden">
         {/* Decorative Element */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-green-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/3"></div>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/3"></div>
         
         <form onSubmit={handleSubmit} className="relative z-10 space-y-10">
           
           {/* Section 1 */}
           <div>
             <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
-              <span className="w-8 h-8 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-sm mr-3">1</span>
+              <span className="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-sm mr-3">1</span>
               Personal Details
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                <input required type="text" name="clientName" value={formData.clientName} onChange={handleChange} placeholder="John Doe" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light" />
+                <input required type="text" name="clientName" value={formData.clientName} onChange={handleChange} placeholder="John Doe" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                <input required type="email" name="email" value={formData.email} onChange={handleChange} placeholder="john@example.com" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light" />
+                <input required type="email" name="email" value={formData.email} onChange={handleChange} placeholder="john@example.com" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light" />
               </div>
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                <input required type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light" />
+                <input required type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light" />
               </div>
             </div>
           </div>
@@ -137,13 +137,13 @@ export default function BookEvent() {
           {/* Section 2 */}
           <div>
             <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
-              <span className="w-8 h-8 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-sm mr-3">2</span>
+              <span className="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-sm mr-3">2</span>
               Event Specifics
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Event Type</label>
-                <select name="eventType" value={formData.eventType} onChange={handleChange} className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light text-gray-900">
+                <select name="eventType" value={formData.eventType} onChange={handleChange} className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light text-gray-900">
                   <option value="Wedding">Wedding</option>
                   <option value="Birthday">Birthday</option>
                   <option value="Corporate Event">Corporate Event</option>
@@ -155,31 +155,31 @@ export default function BookEvent() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Name of Event (Optional)</label>
-                <input type="text" name="eventName" value={formData.eventName} onChange={handleChange} placeholder="e.g. John's 30th Birthday" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light" />
+                <input type="text" name="eventName" value={formData.eventName} onChange={handleChange} placeholder="e.g. John's 30th Birthday" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light" />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Preferred Date</label>
-                <input required type="date" name="eventDate" value={formData.eventDate} onChange={handleChange} className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light text-gray-900" />
+                <input required type="date" name="eventDate" value={formData.eventDate} onChange={handleChange} className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light text-gray-900" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Event Image Banner URL (Optional)</label>
-                <input type="url" name="imageUrl" value={formData.imageUrl} onChange={handleChange} placeholder="https://example.com/image.jpg" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light" />
+                <input type="url" name="imageUrl" value={formData.imageUrl} onChange={handleChange} placeholder="https://example.com/image.jpg" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light" />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">City / Location</label>
-                <input required type="text" name="preferredLocation" value={formData.preferredLocation} onChange={handleChange} placeholder="e.g. Calicut" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light" />
+                <input required type="text" name="preferredLocation" value={formData.preferredLocation} onChange={handleChange} placeholder="e.g. Calicut" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light" />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Estimated Budget (₹)</label>
-                <input required type="number" name="budget" value={formData.budget} onChange={handleChange} placeholder="25000" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light" />
+                <input required type="number" name="budget" value={formData.budget} onChange={handleChange} placeholder="25000" className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light" />
               </div>
               
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">Vision & Requirements</label>
-                <textarea rows={4} name="description" value={formData.description} onChange={handleChange} placeholder="Tell us about the theme, exact venue preferences, number of guests, catering requirements..." className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light resize-none" />
+                <textarea rows={4} name="description" value={formData.description} onChange={handleChange} placeholder="Tell us about the theme, exact venue preferences, number of guests, catering requirements..." className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light resize-none" />
               </div>
             </div>
           </div>

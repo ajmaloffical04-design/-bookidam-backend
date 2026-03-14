@@ -60,7 +60,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             });
           },
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: AppTheme.primaryGreen,
+          selectedItemColor: AppTheme.primaryBlue,
           unselectedItemColor: AppTheme.textLightColor,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
           unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 12),

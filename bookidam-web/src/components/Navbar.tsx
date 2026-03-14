@@ -31,7 +31,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-green-600 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-primary-600 flex items-center justify-center">
             <Calendar className="text-white" size={18} />
           </div>
           <span className="text-xl font-bold tracking-tight text-gray-900">
@@ -41,10 +41,10 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/" className="text-sm font-medium text-gray-600 hover:text-green-600 transition">Events</Link>
-          <Link href="/" className="text-sm font-medium text-gray-600 hover:text-green-600 transition">Venues</Link>
-          <Link href="/about" className="text-sm font-medium text-gray-600 hover:text-green-600 transition">About</Link>
-          <Link href="/contact" className="text-sm font-medium text-gray-600 hover:text-green-600 transition">Contact</Link>
+          <Link href="/" className="text-sm font-medium text-gray-600 hover:text-primary-600 transition">Events</Link>
+          <Link href="/" className="text-sm font-medium text-gray-600 hover:text-primary-600 transition">Venues</Link>
+          <Link href="/about" className="text-sm font-medium text-gray-600 hover:text-primary-600 transition">About</Link>
+          <Link href="/contact" className="text-sm font-medium text-gray-600 hover:text-primary-600 transition">Contact</Link>
         </nav>
 
         {/* Actions */}
@@ -53,7 +53,7 @@ export default function Navbar() {
             <Search size={20} />
           </button>
           <div className="h-6 w-px bg-gray-200 hidden sm:block"></div>
-          <Link href="/book" className="hidden sm:flex items-center gap-2 px-5 py-2.5 bg-green-600 text-white text-sm font-medium rounded-full hover:bg-green-700 transition shadow-sm hover:shadow-md">
+          <Link href="/book" className="hidden sm:flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white text-sm font-medium rounded-full hover:bg-primary-700 transition shadow-sm hover:shadow-md">
             Plan Your Event
           </Link>
           

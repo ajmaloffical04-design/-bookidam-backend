@@ -22,7 +22,7 @@ export default async function EventsPage() {
           <h2 className="text-3xl font-bold text-gray-900">Events Directory</h2>
           <p className="text-gray-500 mt-1">Manage public events listed on the Bookidam app.</p>
         </div>
-        <Link href="/events/new" className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition flex items-center shadow-sm">
+        <Link href="/events/new" className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition flex items-center shadow-sm">
           <Plus size={18} className="mr-2" />
           Create Event
         </Link>
@@ -35,7 +35,7 @@ export default async function EventsPage() {
           <input 
             type="text" 
             placeholder="Search events by name or location..." 
-            className="w-full pl-10 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm"
+            className="w-full pl-10 pr-4 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 shadow-sm"
           />
         </div>
       </div>
@@ -43,12 +43,12 @@ export default async function EventsPage() {
       {/* Event Grid */}
       {events.length === 0 ? (
         <div className="bg-white rounded-xl border border-gray-200 p-12 text-center shadow-sm">
-          <div className="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-primary-50 text-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <Calendar size={32} />
           </div>
           <h3 className="text-lg font-bold text-gray-900 mb-2">No events found</h3>
           <p className="text-gray-500 mb-6 max-w-sm mx-auto">You haven't created any public events yet. Create one to show it on the mobile app.</p>
-          <Link href="/events/new" className="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg font-medium transition shadow-sm inline-flex">
+          <Link href="/events/new" className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-lg font-medium transition shadow-sm inline-flex">
             Create First Event
           </Link>
         </div>
@@ -86,7 +86,7 @@ export default async function EventsPage() {
                   </div>
                 </div>
                 <div className="mt-5 pt-4 border-t border-gray-100 flex justify-between items-center">
-                  <span className="text-sm font-medium text-green-600 hover:text-green-700 cursor-pointer">
+                  <span className="text-sm font-medium text-primary-600 hover:text-primary-700 cursor-pointer">
                     Edit Event
                   </span>
                   <span className="text-sm font-medium text-gray-500 hover:text-red-600 cursor-pointer transition">

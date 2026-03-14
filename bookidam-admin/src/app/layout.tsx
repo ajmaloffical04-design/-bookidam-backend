@@ -22,19 +22,19 @@ export default function RootLayout({
         {/* Sidebar */}
         <aside className="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col">
           <div className="p-6 border-b border-gray-200">
-            <h1 className="text-2xl font-bold text-green-700 tracking-tight">BOOKIDAM</h1>
+            <h1 className="text-2xl font-bold text-primary-700 tracking-tight">BOOKIDAM</h1>
             <p className="text-xs text-gray-500 mt-1 uppercase tracking-wider font-semibold">Admin Panel</p>
           </div>
           <nav className="flex-1 p-4 space-y-1">
-            <Link href="/" className="flex items-center space-x-3 px-3 py-2 text-gray-700 rounded-lg hover:bg-green-50 hover:text-green-700 transition">
+            <Link href="/" className="flex items-center space-x-3 px-3 py-2 text-gray-700 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition">
               <LayoutDashboard size={20} />
               <span className="font-medium">Dashboard</span>
             </Link>
-            <Link href="/requests" className="flex items-center space-x-3 px-3 py-2 text-gray-700 rounded-lg hover:bg-green-50 hover:text-green-700 transition">
+            <Link href="/requests" className="flex items-center space-x-3 px-3 py-2 text-gray-700 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition">
               <FileText size={20} />
               <span className="font-medium">Booking Requests</span>
             </Link>
-            <Link href="/events" className="flex items-center space-x-3 px-3 py-2 text-gray-700 rounded-lg hover:bg-green-50 hover:text-green-700 transition">
+            <Link href="/events" className="flex items-center space-x-3 px-3 py-2 text-gray-700 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition">
               <Calendar size={20} />
               <span className="font-medium">Events List</span>
             </Link>
@@ -49,7 +49,7 @@ export default function RootLayout({
           </nav>
           <div className="p-4 border-t border-gray-200">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center text-white font-bold">
+              <div className="w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold">
                 A
               </div>
               <div>

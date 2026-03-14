@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: var(--font-inter);
+  --color-primary-50: #e5f4ff;
+  --color-primary-100: #cce9ff;
+  --color-primary-200: #99d3ff;
+  --color-primary-300: #66bdff;
+  --color-primary-400: #33a7ff;
+  --color-primary-500: #0091FF;
+  --color-primary-600: #0074cc;
+  --color-primary-700: #005799;
+  --color-primary-800: #003a66;
+  --color-primary-900: #001d33;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  --background: #f8fafc; /* Lighter background for admin */
+  --foreground: #09090b;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #09090b;
     --foreground: #ededed;
   }
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  font-family: var(--font-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Liquid Glass Aesthetics */
+.liquid-glass {
+  @apply bg-white/40 backdrop-blur-2xl border border-white/50 text-gray-900;
+  box-shadow: 0 8px 32px 0 rgba(0, 145, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.glass-nav {
+  @apply bg-white/70 backdrop-blur-xl border-b border-white/20;
+  box-shadow: 0 4px 30px rgba(0, 145, 255, 0.05);
+}
+
+.premium-shadow {
+  box-shadow: 0 10px 40px -10px rgba(0, 145, 255, 0.15);
+}
+
+.hover-lift {
+  @apply transition-transform overflow-visible duration-300 ease-in-out hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary-500/20;
 }

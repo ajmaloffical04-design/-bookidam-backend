@@ -28,13 +28,13 @@ function LoginContent() {
   return (
     <div className="min-h-[90vh] flex items-center justify-center p-6 bg-gray-50/50">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl shadow-green-900/5 border border-gray-100 relative overflow-hidden">
+        <div className="rounded-[2.5rem] p-8 md:p-12 liquid-glass shadow-2xl relative overflow-hidden">
           {/* Decorative Background */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-green-50 rounded-full blur-3xl opacity-60 -translate-y-1/2 translate-x-1/4"></div>
+          <div className="absolute top-0 right-0 w-32 h-32 bg-primary-50 rounded-full blur-3xl opacity-60 -translate-y-1/2 translate-x-1/4"></div>
           
           <div className="relative z-10 text-center mb-10">
             <Link href="/" className="inline-flex items-center gap-2 mb-8 group">
-              <div className="w-10 h-10 rounded-xl bg-green-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                 <Calendar className="text-white" size={20} />
               </div>
               <span className="text-2xl font-bold tracking-tight text-gray-900">BOOKIDAM</span>
@@ -49,7 +49,7 @@ function LoginContent() {
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2 ml-1">Email Address</label>
                 <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-green-600 transition-colors">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary-600 transition-colors">
                     <Mail size={18} />
                   </div>
                   <input 
@@ -58,7 +58,7 @@ function LoginContent() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com" 
-                    className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-green-500/10 focus:border-green-500 transition-all font-light" 
+                    className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all font-light" 
                   />
                 </div>
               </div>
@@ -66,7 +66,7 @@ function LoginContent() {
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2 ml-1">Password</label>
                 <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-green-600 transition-colors">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary-600 transition-colors">
                     <Lock size={18} />
                   </div>
                   <input 
@@ -75,7 +75,7 @@ function LoginContent() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••" 
-                    className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-green-500/10 focus:border-green-500 transition-all font-light" 
+                    className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all font-light" 
                   />
                 </div>
               </div>
@@ -98,7 +98,7 @@ function LoginContent() {
 
           <div className="mt-8 pt-8 border-t border-gray-100 text-center relative z-10">
             <p className="text-sm text-gray-500 font-light">
-              Don't have an account? <span className="text-green-600 font-semibold cursor-pointer hover:underline">Create one</span>
+              Don't have an account? <span className="text-primary-600 font-semibold cursor-pointer hover:underline">Create one</span>
             </p>
           </div>
         </div>
@@ -111,7 +111,7 @@ export default function LoginPage() {
   return (
     <Suspense fallback={
       <div className="min-h-[90vh] flex items-center justify-center p-6 bg-gray-50/50">
-        <div className="w-10 h-10 border-4 border-green-500/20 border-t-green-500 rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-primary-500/20 border-t-primary-500 rounded-full animate-spin"></div>
       </div>
     }>
       <LoginContent />

@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:bookidam/theme/app_theme.dart';
 import 'package:bookidam/models/event_model.dart';
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: AppTheme.backgroundColor,
       body: SafeArea(
         child: RefreshIndicator(
-          color: AppTheme.primaryGreen,
+          color: AppTheme.primaryBlue,
           onRefresh: _fetchEvents,
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -51,56 +52,60 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Welcome to', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppTheme.textLightColor)),
-                          Text('BOOKIDAM', style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 28, color: AppTheme.primaryGreen, letterSpacing: -0.5)),
+                          Text('BOOKIDAM', style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 28, color: AppTheme.primaryBlue, letterSpacing: -0.5)),
                         ],
                       ),
                       const CircleAvatar(
                         radius: 22,
-                        backgroundColor: AppTheme.accentLightGreen,
-                        child: Icon(Icons.person, color: AppTheme.primaryGreen),
+                        backgroundColor: AppTheme.accentLightBlue,
+                        child: Icon(Icons.person, color: AppTheme.primaryBlue),
                       )
                     ],
                   ),
                   const SizedBox(height: 32),
 
-                  // Hero Banner
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [AppTheme.primaryGreen, Color(0xFF27AE60)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppTheme.primaryGreen.withOpacity(0.3),
-                          blurRadius: 15,
-                          offset: const Offset(0, 8),
-                        )
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Book Any Event.\nWe Handle the Rest.",
-                          style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold, height: 1.3),
+                  // Hero Banner (Liquid Glass)
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(24),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(24),
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryBlue.withOpacity(0.85),
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(color: Colors.white.withOpacity(0.3), width: 1.5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppTheme.primaryBlue.withOpacity(0.2),
+                              blurRadius: 20,
+                              offset: const Offset(0, 10),
+                            )
+                          ],
                         ),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: AppTheme.primaryGreen,
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                          ),
-                          child: const Text('Book Now'),
-                        )
-                      ],
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Book Any Event.\nWe Handle the Rest.",
+                              style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold, height: 1.3),
+                            ),
+                            const SizedBox(height: 16),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white.withOpacity(0.9),
+                                foregroundColor: AppTheme.primaryBlue,
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                                elevation: 0,
+                              ),
+                              child: const Text('Book Now'),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ),
 
@@ -113,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Text('Featured Events', style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 20)),
                       TextButton(
                         onPressed: () {},
-                        child: const Text('See All', style: TextStyle(color: AppTheme.primaryGreen, fontWeight: FontWeight.w600)),
+                        child: const Text('See All', style: TextStyle(color: AppTheme.primaryBlue, fontWeight: FontWeight.w600)),
                       )
                     ],
                   ),
@@ -123,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (_isLoading)
                     const Center(child: Padding(
                       padding: EdgeInsets.all(32.0),
-                      child: CircularProgressIndicator(color: AppTheme.primaryGreen),
+                      child: CircularProgressIndicator(color: AppTheme.primaryBlue),
                     ))
                   else if (_events.isEmpty)
                     Container(
@@ -143,76 +148,86 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index) {
                           final event = _events[index];
                           return Container(
-                            width: 240,
                             margin: const EdgeInsets.only(right: 16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.04),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 4),
-                                )
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Event Image Background
-                                Container(
-                                  height: 140,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(24),
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                                child: Container(
+                                  width: 240,
                                   decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-                                    color: Colors.grey[200],
-                                    image: event.imageUrl != null && event.imageUrl!.isNotEmpty
-                                        ? DecorationImage(
-                                            image: NetworkImage(event.imageUrl!), 
-                                            fit: BoxFit.cover,
-                                            onError: (exception, stackTrace) => const AssetImage('assets/placeholder.png'), // fallback handling
-                                          )
-                                        : null,
+                                    color: Colors.white.withOpacity(0.6),
+                                    borderRadius: BorderRadius.circular(24),
+                                    border: Border.all(color: Colors.white.withOpacity(0.8), width: 1.5),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppTheme.primaryBlue.withOpacity(0.08),
+                                        blurRadius: 20,
+                                        spreadRadius: -2,
+                                        offset: const Offset(0, 8),
+                                      )
+                                    ],
                                   ),
-                                  child: event.imageUrl == null || event.imageUrl!.isEmpty
-                                      ? const Center(child: Icon(Icons.calendar_month, color: Colors.grey, size: 40))
-                                      : null,
-                                ),
-                                // Event Details
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        event.type.toUpperCase(),
-                                        style: const TextStyle(color: AppTheme.primaryGreen, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.2),
+                                      // Event Image Background
+                                      Container(
+                                        height: 140,
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                                          color: Colors.grey[200],
+                                          image: event.imageUrl != null && event.imageUrl!.isNotEmpty
+                                              ? DecorationImage(
+                                                  image: NetworkImage(event.imageUrl!), 
+                                                  fit: BoxFit.cover,
+                                                  onError: (exception, stackTrace) => const AssetImage('assets/placeholder.png'), // fallback handling
+                                                )
+                                              : null,
+                                        ),
+                                        child: event.imageUrl == null || event.imageUrl!.isEmpty
+                                            ? const Center(child: Icon(Icons.calendar_month, color: Colors.grey, size: 40))
+                                            : null,
                                       ),
-                                      const SizedBox(height: 6),
-                                      Text(
-                                        event.title,
-                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppTheme.textColor),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      const SizedBox(height: 12),
-                                      Row(
-                                        children: [
-                                          const Icon(Icons.location_on, size: 14, color: AppTheme.textLightColor),
-                                          const SizedBox(width: 4),
-                                          Expanded(
-                                            child: Text(
-                                              event.location,
-                                              style: const TextStyle(color: AppTheme.textLightColor, fontSize: 12),
+                                      // Event Details
+                                      Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              event.type.toUpperCase(),
+                                              style: const TextStyle(color: AppTheme.primaryBlue, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.2),
+                                            ),
+                                            const SizedBox(height: 6),
+                                            Text(
+                                              event.title,
+                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppTheme.textColor),
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                             ),
-                                          ),
-                                        ],
+                                            const SizedBox(height: 12),
+                                            Row(
+                                              children: [
+                                                const Icon(Icons.location_on, size: 14, color: AppTheme.textLightColor),
+                                                const SizedBox(width: 4),
+                                                Expanded(
+                                                  child: Text(
+                                                    event.location,
+                                                    style: const TextStyle(color: AppTheme.textLightColor, fontSize: 12),
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
                           );
                         },

@@ -7,20 +7,20 @@ export default function ContactPage() {
   return (
     <div className="flex flex-col w-full overflow-hidden">
       {/* Header Section */}
-      <section className="relative w-full py-20 px-6 md:px-12 bg-green-900 overflow-hidden">
+      <section className="relative w-full py-20 px-6 md:px-12 bg-primary-900 overflow-hidden">
         {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-green-800 rounded-full blur-3xl opacity-40 -translate-y-1/2 translate-x-1/3"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-green-800 rounded-full blur-3xl opacity-40 translate-y-1/2 -translate-x-1/3"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-800 rounded-full blur-3xl opacity-40 -translate-y-1/2 translate-x-1/3"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-800 rounded-full blur-3xl opacity-40 translate-y-1/2 -translate-x-1/3"></div>
         
         <div className="relative z-10 max-w-5xl mx-auto text-center mt-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-green-100 text-sm font-medium mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-primary-100 text-sm font-medium mb-6">
             <Mail size={16} />
             <span>We're here to help</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
-            Contact <span className="text-green-300">BOOKIDAM</span>
+            Contact <span className="text-primary-300">BOOKIDAM</span>
           </h1>
-          <p className="text-lg md:text-xl text-green-50 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-lg md:text-xl text-primary-50 max-w-2xl mx-auto font-light leading-relaxed">
             Have a question about an upcoming event? Need a custom quote? Or just want to say hi? We'd love to hear from you.
           </p>
         </div>
@@ -42,27 +42,27 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {/* Email */}
               <div className="flex flex-col gap-3">
-                <div className="w-12 h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-primary-50 text-primary-600 rounded-xl flex items-center justify-center">
                   <Mail size={24} />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900">Email</h3>
                 <p className="text-gray-500 font-light text-sm">For general inquiries and support.</p>
-                <a href="mailto:hello@bookidam.com" className="text-green-600 font-medium hover:text-green-700 transition">hello@bookidam.com</a>
+                <a href="mailto:hello@bookidam.com" className="text-primary-600 font-medium hover:text-primary-700 transition">hello@bookidam.com</a>
               </div>
 
               {/* Phone */}
               <div className="flex flex-col gap-3">
-                <div className="w-12 h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-primary-50 text-primary-600 rounded-xl flex items-center justify-center">
                   <Phone size={24} />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900">Phone</h3>
                 <p className="text-gray-500 font-light text-sm">Mon-Fri from 9am to 6pm IST.</p>
-                <a href="tel:+919876543210" className="text-green-600 font-medium hover:text-green-700 transition">+91 98765 43210</a>
+                <a href="tel:+919876543210" className="text-primary-600 font-medium hover:text-primary-700 transition">+91 98765 43210</a>
               </div>
 
               {/* Office */}
               <div className="flex flex-col gap-3">
-                <div className="w-12 h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-primary-50 text-primary-600 rounded-xl flex items-center justify-center">
                   <MapPin size={24} />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900">Office</h3>
@@ -76,7 +76,7 @@ export default function ContactPage() {
 
               {/* Hours */}
               <div className="flex flex-col gap-3">
-                <div className="w-12 h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-primary-50 text-primary-600 rounded-xl flex items-center justify-center">
                   <Clock size={24} />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900">Business Hours</h3>
@@ -90,9 +90,9 @@ export default function ContactPage() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white rounded-[2rem] p-8 md:p-10 premium-shadow border border-gray-100 h-full flex flex-col justify-center relative overflow-hidden">
+          <div className="rounded-[2rem] p-8 md:p-10 liquid-glass h-full flex flex-col justify-center relative overflow-hidden">
              {/* Decorative Element */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-green-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/3"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/3"></div>
 
             <div className="relative z-10">
               <h3 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">Send us a message</h3>
@@ -100,22 +100,22 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
                     <label className="text-sm font-medium text-gray-700 ml-1">First Name</label>
-                    <input type="text" required placeholder="John" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light" />
+                    <input type="text" required placeholder="John" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light" />
                   </div>
                   <div className="space-y-1.5">
                     <label className="text-sm font-medium text-gray-700 ml-1">Last Name</label>
-                    <input type="text" required placeholder="Doe" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light" />
+                    <input type="text" required placeholder="Doe" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light" />
                   </div>
                 </div>
                 
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-gray-700 ml-1">Email</label>
-                  <input type="email" required placeholder="john@example.com" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light" />
+                  <input type="email" required placeholder="john@example.com" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light" />
                 </div>
 
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-gray-700 ml-1">Subject</label>
-                  <select className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light text-gray-900">
+                  <select className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light text-gray-900">
                     <option value="general">General Inquiry</option>
                     <option value="support">Technical Support</option>
                     <option value="billing">Billing Question</option>
@@ -125,7 +125,7 @@ export default function ContactPage() {
 
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-gray-700 ml-1">Message</label>
-                  <textarea rows={4} required placeholder="How can we help you?" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all font-light resize-none" />
+                  <textarea rows={4} required placeholder="How can we help you?" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-light resize-none" />
                 </div>
 
                 <button type="submit" className="w-full py-3.5 bg-gray-900 text-white font-medium rounded-xl hover:bg-black transition-all shadow-lg hover:shadow-xl mt-4">
@@ -139,16 +139,16 @@ export default function ContactPage() {
 
       {/* Map Section or CTA */}
       <section className="py-24 px-6 bg-gray-50">
-        <div className="max-w-5xl mx-auto bg-green-900 rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-green-800 rounded-full blur-3xl opacity-50"></div>
-          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-green-700 rounded-full blur-3xl opacity-50"></div>
+        <div className="max-w-5xl mx-auto bg-primary-900 rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary-800 rounded-full blur-3xl opacity-50"></div>
+          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-primary-700 rounded-full blur-3xl opacity-50"></div>
           
           <div className="relative z-10 flex flex-col items-center">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to plan?</h2>
-            <p className="text-green-100 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+            <p className="text-primary-100 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
                Don't wait. Our expert team is ready to turn your vision into reality. Reach out today and let's create something unforgettable.
             </p>
-            <Link href="/book" className="px-8 py-4 bg-white text-green-900 font-bold rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+            <Link href="/book" className="px-8 py-4 bg-white text-primary-900 font-bold rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
               Start Planning Now
             </Link>
           </div>

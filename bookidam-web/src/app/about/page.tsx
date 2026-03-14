@@ -13,12 +13,12 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="relative w-full py-24 md:py-32 px-6 bg-gray-900 overflow-hidden">
         {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-green-900/40 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/4"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-green-800/20 rounded-full blur-3xl opacity-50 translate-y-1/2 -translate-x-1/4"></div>
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary-900/40 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/4"></div>
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary-800/20 rounded-full blur-3xl opacity-50 translate-y-1/2 -translate-x-1/4"></div>
         
         <div className="relative z-10 max-w-4xl mx-auto text-center mt-10">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
-            Redefining How <br className="hidden md:block"/> We <span className="text-green-400">Experience Events</span>
+            Redefining How <br className="hidden md:block"/> We <span className="text-primary-400">Experience Events</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed">
             BOOKIDAM is more than a booking platform. We are the architects of your most memorable moments, removing the friction from event planning so you can focus on the experience.
@@ -39,7 +39,7 @@ export default function AboutPage() {
           </div>
           
           <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-100 text-green-700 text-sm font-medium">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 border border-primary-100 text-primary-700 text-sm font-medium">
               <Heart size={16} />
               <span>Our Story</span>
             </div>
@@ -72,8 +72,8 @@ export default function AboutPage() {
 
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Value 1 */}
-          <div className="bg-white p-10 rounded-3xl premium-shadow border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-            <div className="w-16 h-16 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-6">
+          <div className="p-10 rounded-3xl liquid-glass hover:-translate-y-2 transition-transform duration-300">
+            <div className="w-16 h-16 bg-primary-50 text-primary-600 rounded-2xl flex items-center justify-center mb-6">
               <Shield size={32} />
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-3">Absolute Reliability</h3>
@@ -83,8 +83,8 @@ export default function AboutPage() {
           </div>
 
           {/* Value 2 */}
-          <div className="bg-white p-10 rounded-3xl premium-shadow border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-            <div className="w-16 h-16 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-6">
+          <div className="p-10 rounded-3xl liquid-glass hover:-translate-y-2 transition-transform duration-300">
+            <div className="w-16 h-16 bg-primary-50 text-primary-600 rounded-2xl flex items-center justify-center mb-6">
               <Users size={32} />
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-3">Community First</h3>
@@ -94,8 +94,8 @@ export default function AboutPage() {
           </div>
 
           {/* Value 3 */}
-          <div className="bg-white p-10 rounded-3xl premium-shadow border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-            <div className="w-16 h-16 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-6">
+          <div className="p-10 rounded-3xl liquid-glass hover:-translate-y-2 transition-transform duration-300">
+            <div className="w-16 h-16 bg-primary-50 text-primary-600 rounded-2xl flex items-center justify-center mb-6">
               <Trophy size={32} />
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-3">Premium Experience</h3>
@@ -111,19 +111,19 @@ export default function AboutPage() {
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-16">By the Numbers</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="space-y-2">
-            <p className="text-5xl font-bold text-green-600">500+</p>
+            <p className="text-5xl font-bold text-primary-600">500+</p>
             <p className="text-gray-500 font-medium">Events Hosted</p>
           </div>
           <div className="space-y-2">
-            <p className="text-5xl font-bold text-green-600">10k+</p>
+            <p className="text-5xl font-bold text-primary-600">10k+</p>
             <p className="text-gray-500 font-medium">Happy Attendees</p>
           </div>
           <div className="space-y-2">
-            <p className="text-5xl font-bold text-green-600">50+</p>
+            <p className="text-5xl font-bold text-primary-600">50+</p>
             <p className="text-gray-500 font-medium">Premium Venues</p>
           </div>
           <div className="space-y-2">
-            <p className="text-5xl font-bold text-green-600">4.9</p>
+            <p className="text-5xl font-bold text-primary-600">4.9</p>
             <p className="text-gray-500 font-medium">Average Rating</p>
           </div>
         </div>
