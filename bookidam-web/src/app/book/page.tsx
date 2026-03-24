@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 
 // Date formatting helper to ensure payloads send as DD-MM-YYYY
 const formatDateToDDMMYYYY = (dateString: string) => {
@@ -78,21 +79,19 @@ ${formData.description}`
     };
 
     try {
-      const apiUrl = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000").replace(/\/$/, "");
-      const res = await fetch(`${apiUrl}/api/bookings`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const { data, error } = await supabase
+        .from('bookings')
+        .insert([payload]);
 
-      if (res.ok) {
-        setSuccess(true);
+      if (error) {
+        console.error("Supabase insert error:", error);
+        alert("Failed to submit booking. Please check your connection.");
       } else {
-        alert("Failed to submit booking. Please try again.");
+        setSuccess(true);
       }
     } catch (err) {
       console.error(err);
-      alert("An error occurred. Make sure the backend is running.");
+      alert("An error occurred. Make sure your environment variables are set.");
     } finally {
       setLoading(false);
     }

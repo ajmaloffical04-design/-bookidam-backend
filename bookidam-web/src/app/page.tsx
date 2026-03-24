@@ -8,14 +8,22 @@ import Testimonials from "@/components/Testimonials";
 import PricingSection from "@/components/PricingSection";
 import FooterFAQ from "@/components/FooterFAQ";
 
+import { supabase } from "@/lib/supabase";
+
 async function getFeaturedEvents() {
   try {
-    const apiUrl = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000").replace(/\/$/, "");
-    const res = await fetch(`${apiUrl}/api/events`, { next: { revalidate: 10 } });
-    if (!res.ok) return [];
-    const json = await res.json();
-    return json.data || [];
+    const { data, error } = await supabase
+      .from('events')
+      .select('*')
+      .order('featured', { ascending: false });
+    
+    if (error) {
+      console.error("Supabase fetch error:", error);
+      return [];
+    }
+    return data || [];
   } catch (err) {
+    console.error("Fetch error:", err);
     return [];
   }
 }
