@@ -60,7 +60,7 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
       startDate: rawDate,
       endDate: rawEndDate,
       singleDayPrice: rawPrice,
-      fullEventPrice: evt.fullEventPrice || (rawPrice > 0 ? rawPrice * 2 : 0),
+      fullEventPrice: evt.fullEventPrice || (rawPrice > 0 ? rawPrice : 0),
       timeSlots: evt.timeSlots && evt.timeSlots.length > 0 ? evt.timeSlots : [
         { id: `default_${idx}`, name: "Standard Entry", time: "All Day Access", price: rawPrice }
       ]
@@ -218,17 +218,12 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
                   
                   <div className="absolute bottom-6 right-6 flex flex-col items-end gap-2">
                     <div className="flex flex-wrap gap-2 p-2 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 items-center justify-end">
-                       <span className="px-3 py-1.5 bg-[#00A372]/10 text-[#00A372] text-xs font-bold uppercase rounded-lg">
-                         From ${getStartingPrice(evt)} / Slot
-                       </span>
-                       {isMultiDay && (
-                         <span className="px-3 py-1.5 bg-eventry-dark/5 text-eventry-dark text-xs font-bold uppercase rounded-lg">
-                           ${evt.fullEventPrice} / Full
-                         </span>
-                       )}
-                    </div>
-                  </div>
-                </div>
+                        <span className="px-3 py-1.5 bg-[#00A372]/10 text-[#00A372] text-xs font-bold uppercase rounded-lg">
+                          From ${getStartingPrice(evt)} / Slot
+                        </span>
+                     </div>
+                   </div>
+                 </div>
                 
                 <div className="flex flex-col flex-grow">
                   <h3 className="text-2xl md:text-3xl font-black text-eventry-dark mb-4 leading-tight group-hover:text-[#00A372] transition-colors line-clamp-2 uppercase">
