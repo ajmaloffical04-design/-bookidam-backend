@@ -24,32 +24,48 @@ const formatDateDisplay = (start: string, end: string) => {
   return `${startFormatted} to ${endFormatted}`;
 };
 
-// Helper to get all dates between two dates
+// Helper to get all dates between two dates safely
 const getDatesBetween = (start: string, end: string) => {
+  if (!start) return [];
   const dates = [];
-  let currentDate = new Date(start);
-  const endDate = new Date(end);
-  
-  while (currentDate <= endDate) {
-    const yyyy = currentDate.getFullYear();
-    const mm = String(currentDate.getMonth() + 1).padStart(2, '0');
-    const dd = String(currentDate.getDate()).padStart(2, '0');
-    dates.push(`${yyyy}-${mm}-${dd}`);
-    currentDate.setDate(currentDate.getDate() + 1);
-  }
+  try {
+    let currentDate = new Date(start);
+    const endDate = end ? new Date(end) : new Date(start);
+    
+    if (isNaN(currentDate.getTime())) return []; // Invalid date fallback
+    
+    while (currentDate <= endDate) {
+      const yyyy = currentDate.getFullYear();
+      const mm = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const dd = String(currentDate.getDate()).padStart(2, '0');
+      dates.push(`${yyyy}-${mm}-${dd}`);
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+  } catch(e) { /* ignore parse errors */ }
   return dates;
 };
 
 export default function EventGrid({ events, hideHeader = false }: { events: any[], hideHeader?: boolean }) {
-  // If no events from API, provide some dummy data fitting the design with multi-day support and time slots
-  const displayEvents = events && events.length > 0 ? events.map(evt => ({
-    ...evt,
-    startDate: evt.startDate || evt.date,
-    endDate: evt.endDate || evt.date,
-    singleDayPrice: evt.singleDayPrice || 50,
-    fullEventPrice: evt.fullEventPrice || 120,
-    timeSlots: evt.timeSlots || []
-  })) : [
+  // Gracefully adapt any backend schema into our advanced time slot UI
+  const displayEvents = events && events.length > 0 ? events.map((evt, idx) => {
+    // Attempt to parse any valid date from backend, default to today if totally missing
+    const rawDate = evt.startDate || evt.date || evt.eventDate || evt.createdAt || new Date().toISOString();
+    const rawEndDate = evt.endDate || rawDate;
+    
+    // Map whatever price field the backend natively uses
+    const rawPrice = evt.price || evt.ticketPrice || evt.singleDayPrice || 0;
+
+    return {
+      ...evt,
+      startDate: rawDate,
+      endDate: rawEndDate,
+      singleDayPrice: rawPrice,
+      fullEventPrice: evt.fullEventPrice || (rawPrice > 0 ? rawPrice * 2 : 0),
+      timeSlots: evt.timeSlots && evt.timeSlots.length > 0 ? evt.timeSlots : [
+        { id: `default_${idx}`, name: "Standard Entry", time: "All Day Access", price: rawPrice }
+      ]
+    };
+  }) : [
     {
       id: "1",
       title: "Neon Nights Music Festival 2026",
