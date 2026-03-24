@@ -57,12 +57,24 @@ export default function BookEvent() {
     e.preventDefault();
     setLoading(true);
 
-    // Prepare payload with formatted dates as DD-MM-YYYY
+    // The backend strictly expects the original schema fields like 'eventDate'. 
+    // We map our new UI state into a payload the backend understands natively, 
+    // injecting the extra details (time slots, end dates) into the description.
     const payload = {
-      ...formData,
-      event_start_date: formatDateToDDMMYYYY(formData.event_start_date),
-      event_end_date: formatDateToDDMMYYYY(formData.event_end_date),
-      selected_date: isMultiDay && formData.selected_date ? formatDateToDDMMYYYY(formData.selected_date) : null,
+      clientName: formData.clientName,
+      phone: formData.phone,
+      email: formData.email,
+      eventType: formData.eventType === "Other" ? formData.custom_event_type : formData.eventType,
+      eventName: formData.eventName,
+      eventDate: formatDateToDDMMYYYY(formData.event_start_date) || "",
+      preferredLocation: formData.preferredLocation,
+      budget: formData.budget,
+      imageUrl: formData.imageUrl,
+      description: `Time Slot: ${formData.time_slot}
+End Date: ${formatDateToDDMMYYYY(formData.event_end_date)}
+${isMultiDay && formData.selected_date ? `Target Date: ${formatDateToDDMMYYYY(formData.selected_date)}\n` : ''}
+User Description:
+${formData.description}`
     };
 
     try {
