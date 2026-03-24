@@ -1,9 +1,31 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import { Ticket } from "lucide-react";
 
 export default function HeroSection() {
+  const [index, setIndex] = useState(0);
+  const services = [
+    "CORPORATE SUMMITS",
+    "PROFESSIONAL SEMINARS",
+    "NETWORKING EVENTS",
+    "BRAND EVENTS",
+    "BUSINESS GATHERINGS",
+    "COMMUNITY",
+    "STRATEGY SESSIONS",
+    "PRODUCT LAUNCHES",
+    "INTIMATE CORPORATE GATHERINGS",
+    "BRAND EVENTS"
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % services.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [services.length]);
+
   return (
     <section className="relative w-full min-h-[90vh] flex flex-col justify-end bg-eventry-dark text-white overflow-hidden pb-12 pt-32 px-6 lg:px-12">
       {/* Background Image with Overlay */}
@@ -19,7 +41,7 @@ export default function HeroSection() {
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center lg:items-start text-center lg:text-left">
-        <motion.h1 
+        <motion.h1
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -28,38 +50,43 @@ export default function HeroSection() {
           BOOKIDAM
         </motion.h1>
 
-        <motion.div 
+        <motion.div
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="w-full flex flex-col lg:flex-row items-center lg:items-end justify-between gap-10 border-t border-white/20 pt-8"
         >
-          {/* Details */}
-          <div className="flex flex-col sm:flex-row gap-8 lg:gap-16 text-left w-full lg:w-auto">
-            <div>
-              <p className="text-xs font-semibold tracking-[0.2em] text-[#00A372] mb-1">LOCATION</p>
-              <p className="text-base font-bold whitespace-nowrap">LOS ANGELES,<br/>CALIFORNIA</p>
+          {/* Animated Services */}
+          <div className="flex flex-col text-left w-full lg:w-80 h-32 sm:h-28 overflow-hidden">
+            <p className="text-xs font-semibold tracking-[0.2em] text-[#00A372] mb-3 uppercase">OUR SERVICES</p>
+            <div className="relative h-16 flex items-center">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={index}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="text-2xl sm:text-3xl font-black absolute w-full leading-tight"
+                >
+                  {services[index]}
+                </motion.p>
+              </AnimatePresence>
             </div>
-            <div>
-              <p className="text-xs font-semibold tracking-[0.2em] text-[#00A372] mb-1">DATE</p>
-              <p className="text-base font-bold uppercase whitespace-nowrap">MAY 12, 2026<br/>EMERALD EVENT ARENA</p>
-            </div>
-            <div className="flex items-end mb-1">
-              <p className="text-lg md:text-xl font-bold uppercase whitespace-nowrap">GENERAL TICKET: $249</p>
-            </div>
+            <p className="text-sm font-bold opacity-60 mt-2 tracking-wide uppercase">Curated Event Experiences</p>
           </div>
 
           <div className="flex flex-col items-center lg:items-end gap-6 w-full lg:w-auto">
             <p className="text-sm font-medium opacity-90 text-center lg:text-right leading-relaxed max-w-sm">
               We are a modern event experience platform bringing people together through conferences and creative festivals to spark innovation.
             </p>
-            
+
             <button className="flex items-center overflow-hidden rounded-xl bg-[#e5f9f1] text-[#0D1B1B] font-bold group hover:-translate-y-1 transition-transform duration-300 shadow-xl shadow-primary-500/20">
               <span className="p-4 bg-white/60 group-hover:bg-white transition-colors">
                 <Ticket className="text-primary-600" size={24} />
               </span>
               <span className="px-6 py-4 bg-[#00A372] text-white transition-colors group-hover:bg-[#00825e] leading-tight text-left">
-                Get your ticket<br/><span className="font-normal opacity-90 text-sm">now for 50% off</span>
+                Get your ticket<br /><span className="font-normal opacity-90 text-sm">now for 50% off</span>
               </span>
             </button>
           </div>
