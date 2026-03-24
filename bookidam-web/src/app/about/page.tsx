@@ -29,13 +29,13 @@ export default function AboutPage() {
       {/* Our Story / Mission */}
       <section className="py-24 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div className="relative h-[500px] rounded-[2rem] overflow-hidden shadow-2xl">
+          <div className="relative h-[500px] rounded-[2rem] overflow-hidden shadow-2xl bg-[#f8faff]">
             <img 
-              src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-              alt="People celebrating at an event" 
-              className="w-full h-full object-cover"
+              src="/about-illustration.png" 
+              alt="3D Corporate Summit Illustration" 
+              className="w-full h-full object-contain p-8"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/10 to-transparent"></div>
           </div>
           
           <div className="space-y-8">
