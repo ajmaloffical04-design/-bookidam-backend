@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, MapPin, ArrowUpRight, X, Ticket } from "lucide-react";
+import { Calendar, MapPin, ArrowUpRight, X, Ticket, Clock } from "lucide-react";
 import { useState } from "react";
 
 const formatDateDisplay = (start: string, end: string) => {
@@ -41,13 +41,14 @@ const getDatesBetween = (start: string, end: string) => {
 };
 
 export default function EventGrid({ events, hideHeader = false }: { events: any[], hideHeader?: boolean }) {
-  // If no events from API, provide some dummy data fitting the design with multi-day support
+  // If no events from API, provide some dummy data fitting the design with multi-day support and time slots
   const displayEvents = events && events.length > 0 ? events.map(evt => ({
     ...evt,
     startDate: evt.startDate || evt.date,
     endDate: evt.endDate || evt.date,
     singleDayPrice: evt.singleDayPrice || 50,
-    fullEventPrice: evt.fullEventPrice || 120
+    fullEventPrice: evt.fullEventPrice || 120,
+    timeSlots: evt.timeSlots || []
   })) : [
     {
       id: "1",
@@ -59,7 +60,12 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
       imageUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
       featured: true,
       singleDayPrice: 50,
-      fullEventPrice: 120
+      fullEventPrice: 150,
+      timeSlots: [
+        { id: "t1", name: "Afternoon Pass", time: "12:00 PM - 05:00 PM", price: 35 },
+        { id: "t2", name: "Night Pass", time: "06:00 PM - 01:00 AM", price: 65 },
+        { id: "t3", name: "All-Day Pass", time: "12:00 PM - 01:00 AM", price: 85 }
+      ]
     },
     {
       id: "2",
@@ -71,7 +77,12 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
       imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&q=80",
       featured: false,
       singleDayPrice: 199,
-      fullEventPrice: 199
+      fullEventPrice: 199,
+      timeSlots: [
+        { id: "c1", name: "Morning Keynote", time: "09:00 AM - 01:00 PM", price: 99 },
+        { id: "c2", name: "Afternoon Workshop", time: "02:00 PM - 06:00 PM", price: 120 },
+        { id: "c3", name: "Full Access pass", time: "09:00 AM - 06:00 PM", price: 199 }
+      ]
     },
     {
       id: "3",
@@ -83,23 +94,42 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
       imageUrl: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=500&q=80",
       featured: false,
       singleDayPrice: 25,
-      fullEventPrice: 80
+      fullEventPrice: 80,
+      timeSlots: [
+        { id: "a1", name: "Early Bird Entry", time: "10:00 AM - 01:00 PM", price: 15 },
+        { id: "a2", name: "Standard Entry", time: "01:00 PM - 07:00 PM", price: 25 }
+      ]
     }
   ];
 
   const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
   const [bookingType, setBookingType] = useState<"single" | "full">("single");
   const [selectedDate, setSelectedDate] = useState<string>("");
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<any | null>(null);
 
   const openModal = (evt: any) => {
     setSelectedEvent(evt);
     setBookingType("single");
     setSelectedDate(evt.startDate);
+    setSelectedTimeSlot(evt.timeSlots && evt.timeSlots.length > 0 ? evt.timeSlots[0] : null);
   };
 
   const closeModal = () => {
     setSelectedEvent(null);
   };
+
+  const getStartingPrice = (evt: any) => {
+    if (evt.timeSlots && evt.timeSlots.length > 0) {
+      return Math.min(...evt.timeSlots.map((s: any) => s.price));
+    }
+    return evt.singleDayPrice;
+  };
+
+  // Dynamically calculate the total box price
+  const currentPrice = selectedEvent ? 
+    (bookingType === "full" ? selectedEvent.fullEventPrice : 
+      (selectedTimeSlot ? selectedTimeSlot.price : selectedEvent.singleDayPrice)) 
+    : 0;
 
   return (
     <section className={`w-full bg-white px-6 lg:px-12 relative ${hideHeader ? 'py-12' : 'py-24 md:py-32'}`}>
@@ -173,7 +203,7 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
                   <div className="absolute bottom-6 right-6 flex flex-col items-end gap-2">
                     <div className="flex flex-wrap gap-2 p-2 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 items-center justify-end">
                        <span className="px-3 py-1.5 bg-[#00A372]/10 text-[#00A372] text-xs font-bold uppercase rounded-lg">
-                         From ${evt.singleDayPrice} / Day
+                         From ${getStartingPrice(evt)} / Slot
                        </span>
                        {isMultiDay && (
                          <span className="px-3 py-1.5 bg-eventry-dark/5 text-eventry-dark text-xs font-bold uppercase rounded-lg">
@@ -214,16 +244,16 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-[2rem] p-6 md:p-10 max-w-xl w-full mx-auto relative shadow-2xl my-auto"
+              className="bg-white rounded-[2rem] p-6 md:p-8 max-w-xl w-full mx-auto relative shadow-2xl my-auto"
             >
               <button 
                 onClick={closeModal}
-                className="absolute top-6 right-6 p-2 bg-gray-100 text-gray-500 hover:text-eventry-dark hover:bg-gray-200 rounded-full transition-colors focus:outline-none"
+                className="absolute top-6 right-6 p-2 bg-gray-100 text-gray-500 hover:text-eventry-dark hover:bg-gray-200 rounded-full transition-colors focus:outline-none z-10"
               >
                 <X size={20} />
               </button>
 
-              <div className="mb-8 pr-12">
+              <div className="mb-6 pr-12">
                 <div className="inline-block px-3 py-1 bg-eventry-dark/5 text-eventry-dark text-xs font-bold uppercase rounded-lg mb-3">
                   {selectedEvent.type}
                 </div>
@@ -240,82 +270,116 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <button 
                         onClick={() => setBookingType("single")}
-                        className={`p-4 rounded-2xl border-2 flex flex-col items-start gap-2 transition-all focus:outline-none ${
+                        className={`p-4 rounded-2xl border-2 flex flex-col items-start gap-1 transition-all focus:outline-none ${
                           bookingType === "single" 
                             ? "border-[#00A372] bg-[#00A372]/5" 
                             : "border-gray-200 hover:border-gray-300"
                         }`}
                       >
-                        <span className="font-bold text-eventry-dark uppercase text-left">Single Day</span>
-                        <span className="text-2xl font-black text-[#00A372]">${selectedEvent.singleDayPrice}</span>
+                        <span className="font-bold text-eventry-dark uppercase text-left text-sm">Single Day / Slot</span>
+                        <span className="text-xl font-black text-[#00A372]">from ${getStartingPrice(selectedEvent)}</span>
                       </button>
                       
                       <button 
                         onClick={() => setBookingType("full")}
-                        className={`p-4 rounded-2xl border-2 flex flex-col items-start gap-2 transition-all focus:outline-none ${
+                        className={`p-4 rounded-2xl border-2 flex flex-col items-start gap-1 transition-all focus:outline-none ${
                           bookingType === "full" 
                             ? "border-eventry-dark bg-eventry-dark/5" 
                             : "border-gray-200 hover:border-gray-300"
                         }`}
                       >
-                        <span className="font-bold text-eventry-dark uppercase text-left">Full Event</span>
-                        <span className="text-2xl font-black text-eventry-dark">${selectedEvent.fullEventPrice}</span>
+                        <span className="font-bold text-eventry-dark uppercase text-left text-sm">Full Event Pass</span>
+                        <span className="text-xl font-black text-eventry-dark">${selectedEvent.fullEventPrice}</span>
                       </button>
                     </div>
                   ) : (
-                    <div className="p-4 rounded-2xl border-2 border-[#00A372] bg-[#00A372]/5 flex flex-col items-start gap-2">
-                      <span className="font-bold text-eventry-dark uppercase">Single Day Event</span>
-                      <span className="text-2xl font-black text-[#00A372]">${selectedEvent.singleDayPrice}</span>
+                    <div className="p-4 rounded-2xl border-2 border-[#00A372] bg-[#00A372]/5 flex flex-col items-start gap-1">
+                      <span className="font-bold text-eventry-dark uppercase text-sm">Single Day Event</span>
+                      <span className="text-xl font-black text-[#00A372]">Select your preferred slot</span>
                     </div>
                   )}
                 </div>
 
-                <div className="flex flex-col gap-3 text-sm font-semibold tracking-wider text-gray-500 uppercase p-4 bg-gray-50 rounded-2xl">
+                <div className="flex flex-col gap-4 text-sm font-semibold tracking-wider text-gray-500 uppercase p-4 bg-gray-50 rounded-2xl">
                   {bookingType === "full" ? (
                     <div className="flex items-center gap-3 text-eventry-dark">
                       <Calendar size={18} className="text-[#00A372]" />
-                      <span>{formatDateDisplay(selectedEvent.startDate, selectedEvent.endDate)}</span>
+                      <span>{formatDateDisplay(selectedEvent.startDate, selectedEvent.endDate)} (Full Access)</span>
                     </div>
                   ) : (
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center gap-3 text-eventry-dark mb-1">
-                        <Calendar size={18} className="text-[#00A372]" />
-                        <span>Select Date:</span>
+                    <div className="flex flex-col gap-4">
+                      {/* Date Selection */}
+                      <div className="flex flex-col gap-2">
+                        <div className="flex items-center gap-3 text-eventry-dark">
+                          <Calendar size={18} className="text-[#00A372]" />
+                          <span>Select Date:</span>
+                        </div>
+                        <select 
+                          value={selectedDate}
+                          onChange={(e) => setSelectedDate(e.target.value)}
+                          className="w-full p-3 rounded-xl border border-gray-200 bg-white font-bold text-eventry-dark focus:border-[#00A372] focus:ring-0 outline-none transition-colors appearance-none cursor-pointer"
+                        >
+                          {getDatesBetween(selectedEvent.startDate, selectedEvent.endDate).map(date => (
+                            <option key={date} value={date}>
+                              {formatDateDisplay(date, date)}
+                            </option>
+                          ))}
+                        </select>
                       </div>
-                      <select 
-                        value={selectedDate}
-                        onChange={(e) => setSelectedDate(e.target.value)}
-                        className="w-full p-3 rounded-xl border border-gray-200 bg-white font-bold text-eventry-dark focus:border-[#00A372] focus:ring-0 outline-none transition-colors appearance-none cursor-pointer"
-                      >
-                        {getDatesBetween(selectedEvent.startDate, selectedEvent.endDate).map(date => (
-                          <option key={date} value={date}>
-                            {formatDateDisplay(date, date)}
-                          </option>
-                        ))}
-                      </select>
+
+                      {/* Time Slot Selection */}
+                      {selectedEvent.timeSlots && selectedEvent.timeSlots.length > 0 && (
+                        <div className="flex flex-col gap-2 mt-2">
+                          <div className="flex items-center gap-3 text-eventry-dark">
+                            <Clock size={18} className="text-[#00A372]" />
+                            <span>Select Time Slot:</span>
+                          </div>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {selectedEvent.timeSlots.map((slot: any) => (
+                              <button
+                                key={slot.id}
+                                onClick={() => setSelectedTimeSlot(slot)}
+                                className={`p-3 rounded-xl border-2 flex flex-col items-start gap-1 transition-all focus:outline-none ${
+                                  selectedTimeSlot?.id === slot.id
+                                    ? "border-[#00A372] bg-[#00A372]/5"
+                                    : "border-gray-200 bg-white hover:border-gray-300"
+                                }`}
+                              >
+                                <span className="font-bold text-eventry-dark text-xs">{slot.name}</span>
+                                <div className="flex justify-between w-full items-center">
+                                   <span className="text-[10px] text-gray-500 lowercase normal-case tracking-normal">{slot.time}</span>
+                                   <span className="font-black text-[#00A372] text-sm">${slot.price}</span>
+                                </div>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                   
-                  <div className="flex items-center gap-3 text-eventry-dark mt-2">
+                  <div className="flex items-center gap-3 text-eventry-dark mt-2 border-t border-gray-200 pt-4">
                     <MapPin size={18} className="text-[#00A372]" />
                     <span>{selectedEvent.location}</span>
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-gray-100 flex flex-col gap-4">
+                <div className="pt-4 border-t border-gray-100 flex flex-col gap-4">
                   <div className="flex justify-between items-center text-xl font-black uppercase text-eventry-dark">
                     <span>Total Price:</span>
                     <span className="text-3xl text-[#00A372]">
-                      ${bookingType === "full" ? selectedEvent.fullEventPrice : selectedEvent.singleDayPrice}
+                      ${currentPrice}
                     </span>
                   </div>
                   
                   <button 
                     onClick={() => {
-                      alert(`Booking Options:\nEvent: ${selectedEvent.title}\nType: ${bookingType === "full" ? 'Full Event' : 'Single Day'}\nDate: ${bookingType === "full" ? formatDateDisplay(selectedEvent.startDate, selectedEvent.endDate) : formatDateDisplay(selectedDate, selectedDate)}\nPrice: $${bookingType === "full" ? selectedEvent.fullEventPrice : selectedEvent.singleDayPrice}`);
+                      const dateStr = bookingType === "full" ? formatDateDisplay(selectedEvent.startDate, selectedEvent.endDate) : formatDateDisplay(selectedDate, selectedDate);
+                      const timeStr = bookingType === "full" ? "All times" : (selectedTimeSlot ? selectedTimeSlot.name : "Standard Entry");
+                      alert(`Booking Confirmed:\n\nEvent: ${selectedEvent.title}\nType: ${bookingType === "full" ? 'Full Event Pass' : 'Single Day'}\nDate: ${dateStr}\nSlot: ${timeStr}\nTotal Price: $${currentPrice}`);
                       closeModal();
                     }}
-                    className="w-full py-5 bg-[#00A372] text-white rounded-2xl font-bold uppercase tracking-widest hover:bg-[#008A60] transition-colors flex items-center justify-center gap-2"
+                    className="w-full py-5 bg-[#00A372] text-white rounded-2xl font-bold uppercase tracking-widest hover:bg-[#008A60] transition-colors flex items-center justify-center gap-2 shadow-xl shadow-[#00A372]/20"
                   >
                     <Ticket size={20} />
                     Book Tickets Now
