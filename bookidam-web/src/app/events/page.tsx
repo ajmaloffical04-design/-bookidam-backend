@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   description: "Browse all upcoming events, concerts, conferences, and more.",
 };
 
+export default async function EventsPage() {
   const events = await getAllEvents();
 
   return (
