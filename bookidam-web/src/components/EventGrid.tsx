@@ -49,7 +49,7 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
   // Gracefully adapt any backend schema into our advanced time slot UI
   const displayEvents = events && events.length > 0 ? events.map((evt, idx) => {
     // Attempt to parse any valid date from backend, default to today if totally missing
-    const rawDate = evt.startDate || evt.date || evt.eventDate || evt.createdAt || new Date().toISOString();
+    const rawDate = evt.startDate || evt.date || evt.eventDate || evt.createdAt || "2026-01-01T00:00:00Z";
     const rawEndDate = evt.endDate || rawDate;
     
     // Map whatever price field the backend natively uses

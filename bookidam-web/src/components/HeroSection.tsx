@@ -20,6 +20,19 @@ export default function HeroSection() {
     "BRAND EVENTS"
   ];
 
+  const [sparkles, setSparkles] = useState<{ top: string; left: string; duration: number; delay: number }[]>([]);
+
+  useEffect(() => {
+    // Generate sparkle positions only on the client to avoid hydration mismatch
+    const generatedSparkles = [...Array(6)].map(() => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      duration: 5 + Math.random() * 5,
+      delay: Math.random() * 5,
+    }));
+    setSparkles(generatedSparkles);
+  }, []);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % services.length);
@@ -40,7 +53,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-glow-primary opacity-60"></div>
         
         {/* Animated Background Sparkles */}
-        {[...Array(6)].map((_, i) => (
+        {sparkles.map((sparkle, i) => (
           <motion.div
             key={i}
             animate={{
@@ -49,14 +62,14 @@ export default function HeroSection() {
               scale: [1, 1.5, 1],
             }}
             transition={{
-              duration: 5 + Math.random() * 5,
+              duration: sparkle.duration,
               repeat: Infinity,
-              delay: Math.random() * 5,
+              delay: sparkle.delay,
             }}
             className="absolute w-1 h-1 bg-primary-400 rounded-full blur-[1px]"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
+              top: sparkle.top,
+              left: sparkle.left,
             }}
           />
         ))}
