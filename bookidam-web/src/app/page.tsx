@@ -15,8 +15,7 @@ async function getFeaturedEvents() {
   try {
     const { data, error } = await supabase
       .from('events')
-      .select('*')
-      .order('featured', { ascending: false });
+      .select('*');
     
     if (error) {
       // Use console.warn to avoid triggering the Dev Overlay while still logging details

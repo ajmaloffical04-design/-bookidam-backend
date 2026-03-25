@@ -2,38 +2,30 @@
 
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, MapPin, ArrowUpRight, X, Ticket, Clock } from "lucide-react";
+import { Calendar, MapPin, X, Ticket, Clock, Star, ArrowUpRight, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
 const formatDateDisplay = (start: string, end: string) => {
   if (!start) return "";
   const formatComponent = (dateString: string) => {
-    // Expected format: YYYY-MM-DD
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
+    const month = date.toLocaleString('default', { month: 'short' });
+    return `${month} ${day}`;
   };
-  
   const startFormatted = formatComponent(start);
-  if (!end || start === end) {
-    return startFormatted;
-  }
+  if (!end || start === end) return startFormatted;
   const endFormatted = formatComponent(end);
-  return `${startFormatted} to ${endFormatted}`;
+  return `${startFormatted} - ${endFormatted}`;
 };
 
-// Helper to get all dates between two dates safely
 const getDatesBetween = (start: string, end: string) => {
   if (!start) return [];
   const dates = [];
   try {
     let currentDate = new Date(start);
     const endDate = end ? new Date(end) : new Date(start);
-    
-    if (isNaN(currentDate.getTime())) return []; // Invalid date fallback
-    
+    if (isNaN(currentDate.getTime())) return [];
     while (currentDate <= endDate) {
       const yyyy = currentDate.getFullYear();
       const mm = String(currentDate.getMonth() + 1).padStart(2, '0');
@@ -41,82 +33,84 @@ const getDatesBetween = (start: string, end: string) => {
       dates.push(`${yyyy}-${mm}-${dd}`);
       currentDate.setDate(currentDate.getDate() + 1);
     }
-  } catch(e) { /* ignore parse errors */ }
+  } catch(e) {}
   return dates;
 };
 
+const FALLBACK_EVENTS = [
+  {
+    id: "1",
+    title: "Neon Nights Music Festival 2026",
+    type: "Music",
+    description: "An electrifying multi-day celebration of sound, lights, and culture in the heart of the city.",
+    startDate: "2026-06-15",
+    endDate: "2026-06-17",
+    location: "Downtown Arena",
+    imageUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
+    rating: 4.9,
+    singleDayPrice: 50,
+    fullEventPrice: 150,
+    timeSlots: [
+      { id: "t1", name: "Afternoon Pass", time: "12:00 PM - 05:00 PM", price: 35 },
+      { id: "t2", name: "Night Pass", time: "06:00 PM - 01:00 AM", price: 65 },
+      { id: "t3", name: "All-Day Pass", time: "12:00 PM - 01:00 AM", price: 85 }
+    ]
+  },
+  {
+    id: "2",
+    title: "Global Tech Summit",
+    type: "Conference",
+    description: "The world's most innovative minds converge for two days of groundbreaking keynotes and workshops.",
+    startDate: "2026-07-22",
+    endDate: "2026-07-22",
+    location: "Convention Center",
+    imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+    rating: 4.8,
+    singleDayPrice: 199,
+    fullEventPrice: 199,
+    timeSlots: [
+      { id: "c1", name: "Morning Keynote", time: "09:00 AM - 01:00 PM", price: 99 },
+      { id: "c2", name: "Afternoon Workshop", time: "02:00 PM - 06:00 PM", price: 120 },
+      { id: "c3", name: "Full Access Pass", time: "09:00 AM - 06:00 PM", price: 199 }
+    ]
+  },
+  {
+    id: "3",
+    title: "Creative Arts Expo",
+    type: "Exhibition",
+    description: "A curated journey through contemporary art, design installations, and live creative performances.",
+    startDate: "2026-08-10",
+    endDate: "2026-08-14",
+    location: "Gallery Row",
+    imageUrl: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=800&q=80",
+    rating: 4.7,
+    singleDayPrice: 25,
+    fullEventPrice: 80,
+    timeSlots: [
+      { id: "a1", name: "Early Bird Entry", time: "10:00 AM - 01:00 PM", price: 15 },
+      { id: "a2", name: "Standard Entry", time: "01:00 PM - 07:00 PM", price: 25 }
+    ]
+  }
+];
+
 export default function EventGrid({ events, hideHeader = false }: { events: any[], hideHeader?: boolean }) {
-  // Gracefully adapt any backend schema into our advanced time slot UI
   const displayEvents = events && events.length > 0 ? events.map((evt, idx) => {
-    // Attempt to parse any valid date from backend, default to today if totally missing
     const rawDate = evt.startDate || evt.date || evt.eventDate || evt.createdAt || "2026-01-01T00:00:00Z";
     const rawEndDate = evt.endDate || rawDate;
-    
-    // Map whatever price field the backend natively uses
     const rawPrice = evt.price || evt.ticketPrice || evt.singleDayPrice || 0;
-
     return {
       ...evt,
       startDate: rawDate,
       endDate: rawEndDate,
       singleDayPrice: rawPrice,
-      fullEventPrice: evt.fullEventPrice || (rawPrice > 0 ? rawPrice : 0),
+      fullEventPrice: evt.fullEventPrice || rawPrice,
+      description: evt.description || evt.summary || evt.details || "",
+      rating: evt.rating || (4.5 + Math.random() * 0.5).toFixed(1),
       timeSlots: evt.timeSlots && evt.timeSlots.length > 0 ? evt.timeSlots : [
         { id: `default_${idx}`, name: "Standard Entry", time: "All Day Access", price: rawPrice }
       ]
     };
-  }) : [
-    {
-      id: "1",
-      title: "Neon Nights Music Festival 2026",
-      type: "Music",
-      startDate: "2026-06-15",
-      endDate: "2026-06-17",
-      location: "Downtown Arena",
-      imageUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
-      featured: true,
-      singleDayPrice: 50,
-      fullEventPrice: 150,
-      timeSlots: [
-        { id: "t1", name: "Afternoon Pass", time: "12:00 PM - 05:00 PM", price: 35 },
-        { id: "t2", name: "Night Pass", time: "06:00 PM - 01:00 AM", price: 65 },
-        { id: "t3", name: "All-Day Pass", time: "12:00 PM - 01:00 AM", price: 85 }
-      ]
-    },
-    {
-      id: "2",
-      title: "Global Tech Summit",
-      type: "Conference",
-      startDate: "2026-07-22",
-      endDate: "2026-07-22",
-      location: "Convention Center",
-      imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&q=80",
-      featured: false,
-      singleDayPrice: 199,
-      fullEventPrice: 199,
-      timeSlots: [
-        { id: "c1", name: "Morning Keynote", time: "09:00 AM - 01:00 PM", price: 99 },
-        { id: "c2", name: "Afternoon Workshop", time: "02:00 PM - 06:00 PM", price: 120 },
-        { id: "c3", name: "Full Access pass", time: "09:00 AM - 06:00 PM", price: 199 }
-      ]
-    },
-    {
-      id: "3",
-      title: "Creative Arts Expo",
-      type: "Exhibition",
-      startDate: "2026-08-10",
-      endDate: "2026-08-14",
-      location: "Gallery Row",
-      imageUrl: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=500&q=80",
-      featured: false,
-      singleDayPrice: 25,
-      fullEventPrice: 80,
-      timeSlots: [
-        { id: "a1", name: "Early Bird Entry", time: "10:00 AM - 01:00 PM", price: 15 },
-        { id: "a2", name: "Standard Entry", time: "01:00 PM - 07:00 PM", price: 25 }
-      ]
-    }
-  ];
+  }) : FALLBACK_EVENTS;
 
   const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
   const [bookingType, setBookingType] = useState<"single" | "full">("single");
@@ -130,21 +124,18 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
     setSelectedTimeSlot(evt.timeSlots && evt.timeSlots.length > 0 ? evt.timeSlots[0] : null);
   };
 
-  const closeModal = () => {
-    setSelectedEvent(null);
-  };
+  const closeModal = () => setSelectedEvent(null);
 
   const getStartingPrice = (evt: any) => {
     if (evt.timeSlots && evt.timeSlots.length > 0) {
-      return Math.min(...evt.timeSlots.map((s: any) => s.price));
+      const prices = evt.timeSlots.map((s: any) => s.price).filter((p: number) => p > 0);
+      return prices.length > 0 ? Math.min(...prices) : evt.singleDayPrice;
     }
     return evt.singleDayPrice;
   };
 
-  // Dynamically calculate the total box price
-  const currentPrice = selectedEvent ? 
-    (bookingType === "full" ? selectedEvent.fullEventPrice : 
-      (selectedTimeSlot ? selectedTimeSlot.price : selectedEvent.singleDayPrice)) 
+  const currentPrice = selectedEvent
+    ? (bookingType === "full" ? selectedEvent.fullEventPrice : (selectedTimeSlot ? selectedTimeSlot.price : selectedEvent.singleDayPrice))
     : 0;
 
   return (
@@ -152,28 +143,25 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
       <div className="max-w-7xl mx-auto">
         {!hideHeader && (
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <motion.div 
+            <motion.div
               initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               className="max-w-2xl"
             >
-              <p className="text-[#00A372] font-bold tracking-[0.2em] text-sm uppercase mb-4">
-                Upcoming Events
-              </p>
+              <p className="text-[#00A372] font-bold tracking-[0.2em] text-sm uppercase mb-4">Upcoming Events</p>
               <h2 className="text-4xl md:text-6xl font-black tracking-tight text-eventry-dark uppercase">
                 Discover what's happening
               </h2>
             </motion.div>
-            
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
             >
-              <Link 
-                href="/events" 
+              <Link
+                href="/events"
                 className="inline-flex items-center gap-2 pb-1 border-b-2 border-eventry-dark font-bold text-eventry-dark uppercase tracking-wider hover:text-primary-500 hover:border-primary-500 transition-colors"
               >
                 See all events <ArrowUpRight size={20} />
@@ -182,65 +170,128 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Premium Card Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayEvents.map((evt, idx) => {
-            const isFeatured = idx === 0 || evt.featured; 
-            const isMultiDay = evt.startDate !== evt.endDate;
-            
+            const startingPrice = getStartingPrice(evt);
+            const isImageTop = idx % 2 === 0; // Alternate image position like the reference
+
             return (
               <motion.div
                 key={evt.id}
-                onClick={() => openModal(evt)}
                 initial={{ y: 40, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: 0.5 }}
-                className={`group cursor-pointer flex flex-col ${isFeatured ? 'lg:col-span-2' : 'col-span-1'}`}
+                transition={{ delay: idx * 0.08, duration: 0.5 }}
+                onClick={() => openModal(evt)}
+                className="group cursor-pointer bg-white rounded-[2rem] overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.14)] border border-gray-100 transition-all duration-500 hover:-translate-y-2 flex flex-col"
               >
-                <div className={`relative overflow-hidden rounded-3xl mb-6 bg-gray-100 ${isFeatured ? 'aspect-[2/1] md:aspect-[16/7]' : 'aspect-square md:aspect-[4/3]'}`}>
-                  {evt.imageUrl ? (
-                    <img 
-                      src={evt.imageUrl} 
-                      alt={evt.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                      <Calendar className="text-gray-400" size={48} />
+                {/* Image Section - Top */}
+                {isImageTop && (
+                  <div className="relative w-full aspect-[4/3] overflow-hidden flex-shrink-0">
+                    {evt.imageUrl ? (
+                      <img
+                        src={evt.imageUrl}
+                        alt={evt.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                        <Calendar className="text-gray-300" size={48} />
+                      </div>
+                    )}
+                    {/* Rating badge on image */}
+                    <div className="absolute bottom-4 right-4 flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-md rounded-full shadow-sm">
+                      <Star size={13} className="text-yellow-400 fill-yellow-400" />
+                      <span className="text-xs font-black text-gray-800">{Number(evt.rating).toFixed(1)}</span>
                     </div>
-                  )}
-                  
-                  <div className="absolute top-6 left-6 flex flex-col gap-2">
-                    <span className="w-max px-4 py-2 bg-white text-eventry-dark text-xs font-bold uppercase tracking-widest rounded-full shadow-sm">
-                      {evt.type}
-                    </span>
+                    {/* Category tags on image */}
+                    <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
+                      <span className="px-3 py-1.5 bg-white/90 backdrop-blur-md text-gray-700 text-[11px] font-bold rounded-full shadow-sm">
+                        {evt.type || "Event"}
+                      </span>
+                    </div>
                   </div>
-                  
-                  <div className="absolute bottom-6 right-6 flex flex-col items-end gap-2">
-                    <div className="flex flex-wrap gap-2 p-2 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 items-center justify-end">
-                        <span className="px-3 py-1.5 bg-[#00A372]/10 text-[#00A372] text-xs font-bold uppercase rounded-lg">
-                          From ${getStartingPrice(evt)} / Slot
-                        </span>
-                     </div>
-                   </div>
-                 </div>
-                
-                <div className="flex flex-col flex-grow">
-                  <h3 className="text-2xl md:text-3xl font-black text-eventry-dark mb-4 leading-tight group-hover:text-[#00A372] transition-colors line-clamp-2 uppercase">
-                    {evt.title}
-                  </h3>
-                  
-                  <div className="mt-auto flex flex-col sm:flex-row gap-4 sm:gap-8 text-sm font-semibold tracking-wider text-gray-500 uppercase">
-                    <div className="flex items-center gap-2">
-                      <Calendar size={18} className="text-[#00A372]" />
-                      <span>{formatDateDisplay(evt.startDate, evt.endDate)}</span>
+                )}
+
+                {/* Content Section */}
+                <div className="p-6 flex flex-col flex-1">
+                  {/* Header Row */}
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <h3 className="text-xl font-black text-gray-900 leading-tight line-clamp-2 group-hover:text-[#00A372] transition-colors">
+                      {evt.title}
+                    </h3>
+                    {!isImageTop && (
+                      <span className="flex-shrink-0 px-3 py-1 bg-gray-100 text-gray-600 text-[10px] font-bold rounded-full uppercase tracking-wider whitespace-nowrap">
+                        Top Rated
+                      </span>
+                    )}
+                    {isImageTop && (
+                      <span className="flex-shrink-0 px-3 py-1 bg-gray-100 text-gray-600 text-[10px] font-bold rounded-full uppercase tracking-wider whitespace-nowrap">
+                        Top Rated
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Date & Location */}
+                  <div className="flex items-center gap-2 mb-3 text-gray-400 text-sm font-medium">
+                    <span>{formatDateDisplay(evt.startDate, evt.endDate)}</span>
+                    <span className="text-gray-300">•</span>
+                    <span className="truncate">{evt.location || "TBA"}</span>
+                  </div>
+
+                  {/* Description */}
+                  {evt.description && (
+                    <p className="text-sm text-gray-500 leading-relaxed line-clamp-2 mb-4 flex-1">
+                      {evt.description}
+                    </p>
+                  )}
+
+                  {/* Price + CTA */}
+                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
+                    <div>
+                      <p className="text-[11px] text-gray-400 font-medium uppercase tracking-wider mb-0.5">From</p>
+                      <p className="text-2xl font-black text-gray-900">
+                        ${startingPrice > 0 ? startingPrice : "—"}
+                        <span className="text-sm font-semibold text-gray-400"> / slot</span>
+                      </p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin size={18} className="text-[#00A372]" />
-                      <span className="truncate max-w-[200px]">{evt.location}</span>
-                    </div>
+                    <button className="flex items-center gap-2 px-5 py-3 bg-[#0D1B1B] text-white text-sm font-bold rounded-2xl hover:bg-[#00A372] transition-all duration-300 group-hover:scale-105 shadow-lg shadow-black/10">
+                      Book Now
+                      <span className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
+                        <ArrowRight size={12} />
+                      </span>
+                    </button>
                   </div>
                 </div>
+
+                {/* Image Section - Bottom (alternate layout) */}
+                {!isImageTop && (
+                  <div className="relative w-full aspect-[4/3] overflow-hidden flex-shrink-0">
+                    {evt.imageUrl ? (
+                      <img
+                        src={evt.imageUrl}
+                        alt={evt.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                        <Calendar className="text-gray-300" size={48} />
+                      </div>
+                    )}
+                    {/* Tags */}
+                    <div className="absolute top-4 left-4 flex gap-2">
+                      <span className="px-3 py-1.5 bg-white/90 backdrop-blur-md text-gray-700 text-[11px] font-bold rounded-full shadow-sm">
+                        {evt.type || "Event"}
+                      </span>
+                    </div>
+                    {/* Rating */}
+                    <div className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-md rounded-full shadow-sm">
+                      <Star size={13} className="text-yellow-400 fill-yellow-400" />
+                      <span className="text-xs font-black text-gray-800">{Number(evt.rating).toFixed(1)}</span>
+                    </div>
+                  </div>
+                )}
               </motion.div>
             );
           })}
@@ -251,62 +302,60 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
       <AnimatePresence>
         {selectedEvent && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-eventry-dark/40 backdrop-blur-sm overflow-y-auto">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               className="bg-white rounded-[2rem] p-6 md:p-8 max-w-xl w-full mx-auto relative shadow-2xl my-auto"
             >
-              <button 
+              <button
                 onClick={closeModal}
-                className="absolute top-6 right-6 p-2 bg-gray-100 text-gray-500 hover:text-eventry-dark hover:bg-gray-200 rounded-full transition-colors focus:outline-none z-10"
+                className="absolute top-6 right-6 p-2 bg-gray-100 text-gray-500 hover:text-eventry-dark hover:bg-gray-200 rounded-full transition-colors z-10"
               >
                 <X size={20} />
               </button>
 
-              <div className="mb-6 pr-12">
+              {selectedEvent.imageUrl && (
+                <div className="w-full h-48 rounded-2xl overflow-hidden mb-6">
+                  <img src={selectedEvent.imageUrl} alt={selectedEvent.title} className="w-full h-full object-cover" />
+                </div>
+              )}
+
+              <div className="mb-6">
                 <div className="inline-block px-3 py-1 bg-eventry-dark/5 text-eventry-dark text-xs font-bold uppercase rounded-lg mb-3">
                   {selectedEvent.type}
                 </div>
-                <h3 className="text-3xl md:text-4xl font-black text-eventry-dark leading-tight uppercase mb-4">
+                <h3 className="text-3xl font-black text-eventry-dark leading-tight uppercase mb-1">
                   {selectedEvent.title}
                 </h3>
+                {selectedEvent.description && (
+                  <p className="text-sm text-gray-500 mt-2">{selectedEvent.description}</p>
+                )}
               </div>
 
               <div className="space-y-6">
                 <div className="space-y-4">
                   <h4 className="text-sm font-bold tracking-widest text-[#00A372] uppercase">Select Booking Option</h4>
-                  
                   {selectedEvent.startDate !== selectedEvent.endDate ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <button 
+                      <button
                         onClick={() => setBookingType("single")}
-                        className={`p-4 rounded-2xl border-2 flex flex-col items-start gap-1 transition-all focus:outline-none ${
-                          bookingType === "single" 
-                            ? "border-[#00A372] bg-[#00A372]/5" 
-                            : "border-gray-200 hover:border-gray-300"
-                        }`}
+                        className={`p-4 rounded-2xl border-2 flex flex-col items-start gap-1 transition-all focus:outline-none ${bookingType === "single" ? "border-[#00A372] bg-[#00A372]/5" : "border-gray-200 hover:border-gray-300"}`}
                       >
                         <span className="font-bold text-eventry-dark uppercase text-left text-sm">Single Day / Slot</span>
                         <span className="text-xl font-black text-[#00A372]">from ${getStartingPrice(selectedEvent)}</span>
                       </button>
-                      
-                      <button 
+                      <button
                         onClick={() => setBookingType("full")}
-                        className={`p-4 rounded-2xl border-2 flex flex-col items-start gap-1 transition-all focus:outline-none ${
-                          bookingType === "full" 
-                            ? "border-eventry-dark bg-eventry-dark/5" 
-                            : "border-gray-200 hover:border-gray-300"
-                        }`}
+                        className={`p-4 rounded-2xl border-2 flex flex-col items-start gap-1 transition-all focus:outline-none ${bookingType === "full" ? "border-eventry-dark bg-eventry-dark/5" : "border-gray-200 hover:border-gray-300"}`}
                       >
                         <span className="font-bold text-eventry-dark uppercase text-left text-sm">Full Event Pass</span>
                         <span className="text-xl font-black text-eventry-dark">${selectedEvent.fullEventPrice}</span>
                       </button>
                     </div>
                   ) : (
-                    <div className="p-4 rounded-2xl border-2 border-[#00A372] bg-[#00A372]/5 flex flex-col items-start gap-1">
-                      <span className="font-bold text-eventry-dark uppercase text-sm">Single Day Event</span>
-                      <span className="text-xl font-black text-[#00A372]">Select your preferred slot</span>
+                    <div className="p-4 rounded-2xl border-2 border-[#00A372] bg-[#00A372]/5">
+                      <span className="font-bold text-eventry-dark uppercase text-sm">Single Day Event — Select your slot</span>
                     </div>
                   )}
                 </div>
@@ -319,26 +368,21 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
                     </div>
                   ) : (
                     <div className="flex flex-col gap-4">
-                      {/* Date Selection */}
                       <div className="flex flex-col gap-2">
                         <div className="flex items-center gap-3 text-eventry-dark">
                           <Calendar size={18} className="text-[#00A372]" />
                           <span>Select Date:</span>
                         </div>
-                        <select 
+                        <select
                           value={selectedDate}
                           onChange={(e) => setSelectedDate(e.target.value)}
-                          className="w-full p-3 rounded-xl border border-gray-200 bg-white font-bold text-eventry-dark focus:border-[#00A372] focus:ring-0 outline-none transition-colors appearance-none cursor-pointer"
+                          className="w-full p-3 rounded-xl border border-gray-200 bg-white font-bold text-eventry-dark focus:border-[#00A372] outline-none appearance-none cursor-pointer"
                         >
                           {getDatesBetween(selectedEvent.startDate, selectedEvent.endDate).map(date => (
-                            <option key={date} value={date}>
-                              {formatDateDisplay(date, date)}
-                            </option>
+                            <option key={date} value={date}>{formatDateDisplay(date, date)}</option>
                           ))}
                         </select>
                       </div>
-
-                      {/* Time Slot Selection */}
                       {selectedEvent.timeSlots && selectedEvent.timeSlots.length > 0 && (
                         <div className="flex flex-col gap-2 mt-2">
                           <div className="flex items-center gap-3 text-eventry-dark">
@@ -350,16 +394,12 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
                               <button
                                 key={slot.id}
                                 onClick={() => setSelectedTimeSlot(slot)}
-                                className={`p-3 rounded-xl border-2 flex flex-col items-start gap-1 transition-all focus:outline-none ${
-                                  selectedTimeSlot?.id === slot.id
-                                    ? "border-[#00A372] bg-[#00A372]/5"
-                                    : "border-gray-200 bg-white hover:border-gray-300"
-                                }`}
+                                className={`p-3 rounded-xl border-2 flex flex-col items-start gap-1 transition-all focus:outline-none ${selectedTimeSlot?.id === slot.id ? "border-[#00A372] bg-[#00A372]/5" : "border-gray-200 bg-white hover:border-gray-300"}`}
                               >
                                 <span className="font-bold text-eventry-dark text-xs">{slot.name}</span>
                                 <div className="flex justify-between w-full items-center">
-                                   <span className="text-[10px] text-gray-500 lowercase normal-case tracking-normal">{slot.time}</span>
-                                   <span className="font-black text-[#00A372] text-sm">${slot.price}</span>
+                                  <span className="text-[10px] text-gray-500 lowercase normal-case tracking-normal">{slot.time}</span>
+                                  <span className="font-black text-[#00A372] text-sm">${slot.price}</span>
                                 </div>
                               </button>
                             ))}
@@ -368,7 +408,6 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
                       )}
                     </div>
                   )}
-                  
                   <div className="flex items-center gap-3 text-eventry-dark mt-2 border-t border-gray-200 pt-4">
                     <MapPin size={18} className="text-[#00A372]" />
                     <span>{selectedEvent.location}</span>
@@ -378,19 +417,16 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
                 <div className="pt-4 border-t border-gray-100 flex flex-col gap-4">
                   <div className="flex justify-between items-center text-xl font-black uppercase text-eventry-dark">
                     <span>Total Price:</span>
-                    <span className="text-3xl text-[#00A372]">
-                      ${currentPrice}
-                    </span>
+                    <span className="text-3xl text-[#00A372]">${currentPrice}</span>
                   </div>
-                  
-                  <button 
+                  <button
                     onClick={() => {
                       const dateStr = bookingType === "full" ? formatDateDisplay(selectedEvent.startDate, selectedEvent.endDate) : formatDateDisplay(selectedDate, selectedDate);
                       const timeStr = bookingType === "full" ? "All times" : (selectedTimeSlot ? selectedTimeSlot.name : "Standard Entry");
-                      alert(`Booking Confirmed:\n\nEvent: ${selectedEvent.title}\nType: ${bookingType === "full" ? 'Full Event Pass' : 'Single Day'}\nDate: ${dateStr}\nSlot: ${timeStr}\nTotal Price: $${currentPrice}`);
+                      alert(`Booking Confirmed!\n\nEvent: ${selectedEvent.title}\nType: ${bookingType === "full" ? 'Full Event Pass' : 'Single Day'}\nDate: ${dateStr}\nSlot: ${timeStr}\nTotal: $${currentPrice}`);
                       closeModal();
                     }}
-                    className="w-full py-5 bg-[#00A372] text-white rounded-2xl font-bold uppercase tracking-widest hover:bg-[#008A60] transition-colors flex items-center justify-center gap-2 shadow-xl shadow-[#00A372]/20"
+                    className="w-full py-5 bg-[#0D1B1B] text-white rounded-2xl font-bold uppercase tracking-widest hover:bg-[#00A372] transition-colors flex items-center justify-center gap-2 shadow-xl"
                   >
                     <Ticket size={20} />
                     Book Tickets Now
