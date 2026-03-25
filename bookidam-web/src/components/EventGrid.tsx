@@ -37,64 +37,8 @@ const getDatesBetween = (start: string, end: string) => {
   return dates;
 };
 
-const FALLBACK_EVENTS = [
-  {
-    id: "1",
-    title: "Neon Nights Music Festival 2026",
-    type: "Music",
-    description: "An electrifying multi-day celebration of sound, lights, and culture in the heart of the city.",
-    startDate: "2026-06-15",
-    endDate: "2026-06-17",
-    location: "Downtown Arena",
-    imageUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
-    rating: 4.9,
-    singleDayPrice: 50,
-    fullEventPrice: 150,
-    timeSlots: [
-      { id: "t1", name: "Afternoon Pass", time: "12:00 PM - 05:00 PM", price: 35 },
-      { id: "t2", name: "Night Pass", time: "06:00 PM - 01:00 AM", price: 65 },
-      { id: "t3", name: "All-Day Pass", time: "12:00 PM - 01:00 AM", price: 85 }
-    ]
-  },
-  {
-    id: "2",
-    title: "Global Tech Summit",
-    type: "Conference",
-    description: "The world's most innovative minds converge for two days of groundbreaking keynotes and workshops.",
-    startDate: "2026-07-22",
-    endDate: "2026-07-22",
-    location: "Convention Center",
-    imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-    rating: 4.8,
-    singleDayPrice: 199,
-    fullEventPrice: 199,
-    timeSlots: [
-      { id: "c1", name: "Morning Keynote", time: "09:00 AM - 01:00 PM", price: 99 },
-      { id: "c2", name: "Afternoon Workshop", time: "02:00 PM - 06:00 PM", price: 120 },
-      { id: "c3", name: "Full Access Pass", time: "09:00 AM - 06:00 PM", price: 199 }
-    ]
-  },
-  {
-    id: "3",
-    title: "Creative Arts Expo",
-    type: "Exhibition",
-    description: "A curated journey through contemporary art, design installations, and live creative performances.",
-    startDate: "2026-08-10",
-    endDate: "2026-08-14",
-    location: "Gallery Row",
-    imageUrl: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=800&q=80",
-    rating: 4.7,
-    singleDayPrice: 25,
-    fullEventPrice: 80,
-    timeSlots: [
-      { id: "a1", name: "Early Bird Entry", time: "10:00 AM - 01:00 PM", price: 15 },
-      { id: "a2", name: "Standard Entry", time: "01:00 PM - 07:00 PM", price: 25 }
-    ]
-  }
-];
-
 export default function EventGrid({ events, hideHeader = false }: { events: any[], hideHeader?: boolean }) {
-  const displayEvents = events && events.length > 0 ? events.map((evt, idx) => {
+  const displayEvents = (events || []).map((evt, idx) => {
     const rawDate = evt.startDate || evt.date || evt.eventDate || evt.createdAt || "2026-01-01T00:00:00Z";
     const rawEndDate = evt.endDate || rawDate;
     const rawPrice = evt.price || evt.ticketPrice || evt.singleDayPrice || 0;
@@ -105,12 +49,12 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
       singleDayPrice: rawPrice,
       fullEventPrice: evt.fullEventPrice || rawPrice,
       description: evt.description || evt.summary || evt.details || "",
-      rating: evt.rating || (4.5 + Math.random() * 0.5).toFixed(1),
+      rating: evt.rating || 4.8,
       timeSlots: evt.timeSlots && evt.timeSlots.length > 0 ? evt.timeSlots : [
         { id: `default_${idx}`, name: "Standard Entry", time: "All Day Access", price: rawPrice }
       ]
     };
-  }) : FALLBACK_EVENTS;
+  });
 
   const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
   const [bookingType, setBookingType] = useState<"single" | "full">("single");

@@ -40,17 +40,6 @@ export default async function Home() {
       <AboutSection />
       <BookingFlow />
       <EventGrid events={events} />
-      {events.length === 0 && (
-        <div className="max-w-7xl mx-auto py-20 text-center">
-          <div className="inline-block p-12 glass-card-light border-dashed border-gray-300">
-            <Sparkles className="mx-auto text-primary-500 mb-6 group-hover:animate-pulse" size={48} />
-            <h3 className="text-2xl font-black text-eventry-dark mb-4 uppercase tracking-tighter">Stay Tuned!</h3>
-            <p className="text-gray-500 max-w-sm mx-auto leading-relaxed">
-              We're currently updating our event calendar. Check back soon for the most exclusive corporate summits and professional gatherings.
-            </p>
-          </div>
-        </div>
-      )}
       <Testimonials />
       <PricingSection />
       <FooterFAQ />
