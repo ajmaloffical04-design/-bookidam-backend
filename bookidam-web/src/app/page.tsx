@@ -11,6 +11,8 @@ import FooterFAQ from "@/components/FooterFAQ";
 
 import { supabase } from "@/lib/supabase";
 
+export const dynamic = "force-dynamic";
+
 async function getFeaturedEvents() {
   try {
     const { data, error } = await supabase
