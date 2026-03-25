@@ -4,6 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import MobileFooter from "@/components/MobileFooter";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,11 +28,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${plusJakartaSans.variable} font-sans bg-background text-foreground min-h-screen flex flex-col antialiased`}>
+      <body className={`${inter.variable} ${plusJakartaSans.variable} font-sans bg-background text-foreground min-h-screen flex flex-col antialiased pb-20 md:pb-0`}>
         <Navbar />
         <main className="flex-grow">
           {children}
         </main>
+        <MobileFooter />
       </body>
     </html>
   );
