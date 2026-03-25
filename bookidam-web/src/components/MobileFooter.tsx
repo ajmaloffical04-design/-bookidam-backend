@@ -12,7 +12,7 @@ const MobileFooter = () => {
     { name: 'HOME', icon: Home, href: '/' },
     { name: 'EXPLORE', icon: Compass, href: '/events' },
     { name: 'TICKETS', icon: Ticket, href: '/book' },
-    { name: 'PROFILE', icon: User, href: '/login' },
+    { name: 'PROFILE', icon: User, href: '/profile' },
   ];
 
   return (

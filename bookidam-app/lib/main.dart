@@ -4,6 +4,7 @@ import 'package:bookidam/theme/app_theme.dart';
 import 'package:bookidam/screens/home_screen.dart';
 import 'package:bookidam/screens/events_screen.dart';
 import 'package:bookidam/screens/booking_screen.dart';
+import 'package:bookidam/screens/profile_screen.dart';
 
 void main() {
   runApp(const BookidamApp());
@@ -37,16 +38,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     const HomeScreen(),
     const EventsScreen(),
     const BookingScreen(),
-    const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.person, size: 64, color: AppTheme.primaryBlue),
-          SizedBox(height: 16),
-          Text('Profile - Coming Soon', style: TextStyle(color: AppTheme.textLightColor, fontSize: 18)),
-        ],
-      ),
-    ),
+    const ProfileScreen(),
   ];
 
   @override
