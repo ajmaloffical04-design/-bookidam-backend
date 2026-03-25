@@ -19,17 +19,14 @@ async function getFeaturedEvents() {
       .order('featured', { ascending: false });
     
     if (error) {
-      console.error("Supabase fetch error details:", {
-        message: error.message,
-        details: error.details,
-        hint: error.hint,
-        code: error.code
-      });
+      // Use console.warn to avoid triggering the Dev Overlay while still logging details
+      console.warn("Supabase Fetch Problem:", error.message || "Network error or invalid URL (Check .env.local)");
+      console.dir(error); 
       return [];
     }
     return data || [];
   } catch (err) {
-    console.error("Unexpected Fetch Error:", err);
+    console.warn("Unexpected Connection Issue:", err);
     return [];
   }
 }
