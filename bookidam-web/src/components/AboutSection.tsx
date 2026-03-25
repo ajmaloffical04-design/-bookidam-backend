@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Sparkles } from "lucide-react";
 
 export default function AboutSection() {
   const avatars = [
@@ -11,56 +12,68 @@ export default function AboutSection() {
   ];
 
   return (
-    <section className="w-full bg-eventry-light py-24 md:py-32 px-6 lg:px-12">
-      <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
+    <section className="relative w-full bg-eventry-light dark:bg-eventry-dark py-32 md:py-48 px-6 lg:px-12 overflow-hidden transition-colors duration-500">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-500/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto flex flex-col items-center">
         
         <motion.div 
-          initial={{ y: 30, opacity: 0 }}
+          initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-20 text-center"
         >
-          <p className="text-[#00A372] font-bold tracking-[0.2em] text-sm md:text-base uppercase mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-xs font-black tracking-[0.3em] uppercase border border-primary-500/20 mb-8">
+            <Sparkles size={14} />
             Everything you need
-          </p>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-eventry-dark max-w-5xl leading-tight">
-            Seamless event management with a premium touch.
+          </div>
+          <h2 className="text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tighter text-eventry-dark dark:text-white max-w-5xl leading-[0.95] text-balance">
+            Seamless management with a <span className="text-primary-500 italic">premium</span> touch.
           </h2>
         </motion.div>
 
         <motion.div 
-          initial={{ y: 30, opacity: 0 }}
+          initial={{ y: 40, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-3xl mx-auto flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 pb-12"
+          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full flex flex-col md:flex-row items-stretch justify-center gap-8 md:gap-12"
         >
-          <p className="text-lg text-gray-600 leading-relaxed md:text-left flex-1">
-            Whether you are organizing a massive music festival, a professional corporate summit, or an intimate gathering, we provide the tools to make it unforgettable.
-          </p>
+          <div className="flex-1 glass-card-light dark:glass-card-dark p-10 md:p-14 border-white/20 dark:border-white/5 flex flex-col justify-center relative overflow-hidden group">
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary-500/10 rounded-full blur-3xl group-hover:bg-primary-500/20 transition-colors"></div>
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed font-light relative z-10">
+              Whether you are organizing a massive music festival, a professional corporate summit, or an intimate gathering, we provide the tools to make it <span className="text-eventry-dark dark:text-white font-bold">unforgettable</span>.
+            </p>
+          </div>
 
-          {/* Attendees / Stats */}
-          <div className="flex flex-col items-center md:items-start flex-1 border-t md:border-t-0 md:border-l border-gray-200 pt-6 md:pt-0 md:pl-12 w-full md:w-auto">
-            <h3 className="text-4xl font-bold text-eventry-dark mb-2">80+</h3>
-            <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-4">Successful Events</p>
+          {/* Attendees / Stats Grid */}
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="glass-card-light dark:glass-card-dark p-10 border-white/20 dark:border-white/5 flex flex-col items-center justify-center text-center hover-lift">
+              <h3 className="text-6xl font-black text-eventry-dark dark:text-white mb-2 tracking-tighter">80<span className="text-primary-500">+</span></h3>
+              <p className="text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]">Successful Events</p>
+            </div>
             
-            {/* Avatars */}
-            <div className="flex -space-x-3">
-              {avatars.map((url, i) => (
-                <img 
-                  key={i} 
-                  src={url} 
-                  alt="Attendee" 
-                  className="w-10 h-10 rounded-full border-2 border-eventry-light object-cover relative"
-                  style={{ zIndex: avatars.length - i }}
-                />
-              ))}
-              <div 
-                className="w-10 h-10 rounded-full border-2 border-eventry-light bg-[#00A372] text-white flex items-center justify-center text-xs font-bold relative z-0"
-              >
-                +2k
+            <div className="glass-card-light dark:glass-card-dark p-10 border-white/20 dark:border-white/5 flex flex-col items-center justify-center text-center hover-lift">
+               <div className="flex -space-x-4 mb-6">
+                {avatars.map((url, i) => (
+                  <img 
+                    key={i} 
+                    src={url} 
+                    alt="Attendee" 
+                    className="w-12 h-12 rounded-2xl border-4 border-white dark:border-gray-800 object-cover relative shadow-xl transform hover:-translate-y-2 transition-transform"
+                    style={{ zIndex: avatars.length - i }}
+                  />
+                ))}
+                <div 
+                  className="w-12 h-12 rounded-2xl border-4 border-white dark:border-gray-800 bg-[#00A372] text-white flex items-center justify-center text-[10px] font-black relative z-0 shadow-xl"
+                >
+                  +2K
+                </div>
               </div>
+              <p className="text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]">Happy Clients</p>
             </div>
           </div>
         </motion.div>

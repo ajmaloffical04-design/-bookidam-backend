@@ -2,7 +2,8 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Ticket } from "lucide-react";
+import { Ticket, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export default function HeroSection() {
   const [index, setIndex] = useState(0);
@@ -27,68 +28,98 @@ export default function HeroSection() {
   }, [services.length]);
 
   return (
-    <section className="relative w-full min-h-[90vh] flex flex-col justify-end bg-eventry-dark text-white overflow-hidden pb-12 pt-32 px-6 lg:px-12">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
+    <section className="relative w-full min-h-[95vh] flex flex-col justify-end bg-eventry-dark text-white overflow-hidden pb-16 pt-32 px-6 lg:px-12">
+      {/* Background Image with Advanced Overlays */}
+      <div className="absolute inset-0 z-0 scale-105">
         <img
           src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
           alt="Concert Crowd"
-          className="w-full h-full object-cover opacity-50"
+          className="w-full h-full object-cover opacity-60 mix-blend-luminosity"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-eventry-dark via-eventry-dark/60 to-transparent"></div>
-        {/* Subtle green/teal tint overlay */}
-        <div className="absolute inset-0 bg-[#00A372] mix-blend-multiply opacity-20"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-eventry-dark via-eventry-dark/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-glow-primary opacity-60"></div>
+        
+        {/* Animated Background Sparkles */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{
+              y: [0, -100, 0],
+              opacity: [0, 0.4, 0],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 5 + Math.random() * 5,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+            }}
+            className="absolute w-1 h-1 bg-primary-400 rounded-full blur-[1px]"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+          />
+        ))}
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center lg:items-start text-center lg:text-left">
-        <motion.h1
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-[4rem] sm:text-7xl lg:text-[10rem] font-black tracking-tighter leading-none mb-12 uppercase drop-shadow-xl"
+        <motion.div
+           initial={{ y: 80, opacity: 0 }}
+           animate={{ y: 0, opacity: 1 }}
+           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          BOOKIDAM
-        </motion.h1>
+          <p className="text-[#00A372] font-black tracking-[0.4em] text-xs sm:text-sm mb-6 uppercase text-glow">
+            THE FUTURE OF EVENTS
+          </p>
+          <h1 className="text-[5rem] sm:text-8xl lg:text-[12rem] font-black tracking-tighter leading-[0.85] mb-12 uppercase drop-shadow-2xl">
+            BOOKIDAM<span className="text-primary-500">.</span>
+          </h1>
+        </motion.div>
 
         <motion.div
-          initial={{ y: 30, opacity: 0 }}
+          initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="w-full flex flex-col lg:flex-row items-center lg:items-end justify-between gap-10 border-t border-white/20 pt-8"
+          transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full flex flex-col lg:flex-row items-center lg:items-end justify-between gap-12 pt-12 border-t border-white/10"
         >
-          {/* Animated Services */}
-          <div className="flex flex-col text-left w-full lg:w-80 h-32 sm:h-28 overflow-hidden">
-            <p className="text-xs font-semibold tracking-[0.2em] text-[#00A372] mb-3 uppercase">OUR SERVICES</p>
-            <div className="relative h-16 flex items-center">
+          {/* Animated Services with Glass Effect */}
+          <div className="flex flex-col text-left w-full lg:w-96 p-8 glass-card-dark border-white/5 hover:border-white/20 transition-all group overflow-hidden relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <p className="text-[10px] font-black tracking-[0.3em] text-[#00A372] mb-6 uppercase relative z-10">OUR SERVICES</p>
+            <div className="relative h-20 flex items-center z-10">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={index}
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -20, opacity: 0 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                  className="text-2xl sm:text-3xl font-black absolute w-full leading-tight"
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -20, opacity: 0 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-3xl sm:text-4xl font-black absolute w-full leading-none tracking-tight"
                 >
                   {services[index]}
                 </motion.p>
               </AnimatePresence>
             </div>
-            <p className="text-sm font-bold opacity-60 mt-2 tracking-wide uppercase">Curated Event Experiences</p>
+            <p className="text-sm font-bold opacity-40 mt-8 tracking-widest uppercase relative z-10">Curated Event Experiences</p>
           </div>
 
-          <div className="flex flex-col items-center lg:items-end gap-6 w-full lg:w-auto">
-            <p className="text-sm font-medium opacity-90 text-center lg:text-right leading-relaxed max-w-sm">
+          <div className="flex flex-col items-center lg:items-end gap-8 w-full lg:w-auto">
+            <p className="text-lg font-medium opacity-80 text-center lg:text-right leading-relaxed max-w-sm text-balance">
               We are a modern event experience platform bringing people together through conferences and creative festivals to spark innovation.
             </p>
 
-            <button className="flex items-center overflow-hidden rounded-xl bg-[#e5f9f1] text-[#0D1B1B] font-bold group hover:-translate-y-1 transition-transform duration-300 shadow-xl shadow-primary-500/20">
-              <span className="p-4 bg-white/60 group-hover:bg-white transition-colors">
-                <Ticket className="text-primary-600" size={24} />
-              </span>
-              <span className="px-6 py-4 bg-[#00A372] text-white transition-colors group-hover:bg-[#00825e] leading-tight text-left">
-                Get your ticket<br /><span className="font-normal opacity-90 text-sm">now for 50% off</span>
-              </span>
-            </button>
+            <Link href="/book" className="group relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
+              <button className="relative flex items-center overflow-hidden rounded-2xl bg-white text-eventry-dark font-bold transition-all duration-300 shadow-2xl hover:scale-[1.02] active:scale-[0.98]">
+                <span className="p-5 bg-primary-500 text-white group-hover:bg-primary-600 transition-colors">
+                  <Ticket size={28} />
+                </span>
+                <span className="px-8 py-5 bg-white dark:bg-gray-900 dark:text-white transition-colors leading-tight text-left">
+                  Get your ticket<br />
+                  <span className="font-normal opacity-60 text-sm italic tracking-tight underline decoration-primary-500/30">now for 50% off</span>
+                </span>
+              </button>
+            </Link>
           </div>
         </motion.div>
       </div>
