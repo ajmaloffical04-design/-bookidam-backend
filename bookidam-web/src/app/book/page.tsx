@@ -60,17 +60,17 @@ export default function BookEvent() {
     setLoading(true);
 
     const payload = {
-      clientName: formData.clientName,
+      client_name: formData.clientName,
       phone: formData.phone,
       email: formData.email,
-      eventType: formData.eventType === "Other" ? formData.custom_event_type : formData.eventType,
-      eventName: formData.eventName,
-      eventDate: formatDateToDDMMYYYY(formData.event_start_date) || "",
-      preferredLocation: formData.preferredLocation,
+      event_type: formData.eventType === "Other" ? formData.custom_event_type : formData.eventType,
+      event_name: formData.eventName,
+      event_date: formatDateToDDMMYYYY(formData.event_start_date) || "",
+      preferred_location: formData.preferredLocation,
+      preferred_time: formData.time_slot,
       budget: formData.budget,
-      imageUrl: formData.imageUrl,
-      description: `Time Slot: ${formData.time_slot}
-End Date: ${formatDateToDDMMYYYY(formData.event_end_date)}
+      image_url: formData.imageUrl,
+      description: `End Date: ${formatDateToDDMMYYYY(formData.event_end_date)}
 ${isMultiDay && formData.selected_date ? `Target Date: ${formatDateToDDMMYYYY(formData.selected_date)}\n` : ''}
 User Description:
 ${formData.description}`

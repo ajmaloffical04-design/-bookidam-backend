@@ -168,10 +168,10 @@ export default function ProfilePage() {
                       </div>
                       <div>
                         <h3 className="text-xl font-bold text-eventry-dark dark:text-white group-hover:text-primary-500 transition-colors">
-                          {booking.eventName || booking.eventType}
+                          {booking.event_name || booking.event_type}
                         </h3>
                         <p className="text-gray-500 dark:text-gray-400 font-light text-sm mt-1">
-                          Requested for <span className="font-semibold text-eventry-dark dark:text-gray-300">{booking.eventDate}</span> • {booking.preferredLocation}
+                          Requested for <span className="font-semibold text-eventry-dark dark:text-gray-300">{booking.event_date}</span> • {booking.preferred_location}
                         </p>
                       </div>
                     </div>
