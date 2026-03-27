@@ -117,20 +117,20 @@ export default function HeroSection() {
             <p className="text-sm font-bold opacity-40 mt-8 tracking-widest uppercase relative z-10">Curated Event Experiences</p>
           </div>
 
-          <div className="flex flex-col items-center lg:items-end gap-8 w-full lg:w-auto">
-            <p className="text-lg font-medium opacity-80 text-center lg:text-right leading-relaxed max-w-sm text-balance">
+          <div className="flex flex-col items-center lg:items-end gap-6 lg:gap-8 w-full lg:w-auto">
+            <p className="text-sm md:text-base lg:text-lg font-medium opacity-80 text-center lg:text-right leading-relaxed max-w-sm text-balance">
               We are a modern event experience platform bringing people together through conferences and creative festivals to spark innovation.
             </p>
 
             <Link href="/book" className="group relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
               <button className="relative flex items-center overflow-hidden rounded-2xl bg-white text-eventry-dark font-bold transition-all duration-300 shadow-2xl hover:scale-[1.02] active:scale-[0.98]">
-                <span className="p-5 bg-primary-500 text-white group-hover:bg-primary-600 transition-colors">
-                  <Ticket size={28} />
+                <span className="p-4 sm:p-5 bg-primary-500 text-white group-hover:bg-primary-600 transition-colors">
+                  <Ticket className="w-6 h-6 sm:w-7 sm:h-7" />
                 </span>
-                <span className="px-8 py-5 bg-white dark:bg-gray-900 dark:text-white transition-colors leading-tight text-left">
+                <span className="px-6 py-4 sm:px-8 sm:py-5 bg-white dark:bg-gray-900 dark:text-white transition-colors leading-tight text-left text-sm sm:text-base">
                   Get your ticket<br />
-                  <span className="font-normal opacity-60 text-sm italic tracking-tight underline decoration-primary-500/30">now for 50% off</span>
+                  <span className="font-normal opacity-60 text-xs sm:text-sm italic tracking-tight underline decoration-primary-500/30">now for 50% off</span>
                 </span>
               </button>
             </Link>
