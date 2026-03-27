@@ -41,7 +41,7 @@ export default function HeroSection() {
   }, [services.length]);
 
   return (
-    <section className="relative w-full min-h-[95vh] flex flex-col justify-end bg-eventry-dark text-white overflow-hidden pb-16 pt-32 px-6 lg:px-12">
+    <section className="relative w-full min-h-[100svh] flex flex-col justify-end bg-eventry-dark text-white overflow-hidden pb-16 pt-48 lg:pt-32 px-4 sm:px-6 lg:px-12">
       {/* Background Image with Advanced Overlays */}
       <div className="absolute inset-0 z-0 scale-105">
         <img
@@ -80,11 +80,12 @@ export default function HeroSection() {
            initial={{ y: 80, opacity: 0 }}
            animate={{ y: 0, opacity: 1 }}
            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+           className="mt-8 md:mt-0"
         >
-          <p className="text-[#00A372] font-black tracking-[0.4em] text-xs sm:text-sm mb-6 uppercase text-glow">
+          <p className="text-[#00A372] font-black tracking-[0.4em] text-[10px] sm:text-xs mb-4 md:mb-6 uppercase text-glow">
             THE FUTURE OF EVENTS
           </p>
-          <h1 className="text-[5rem] sm:text-8xl lg:text-[12rem] font-black tracking-tighter leading-[0.85] mb-12 uppercase drop-shadow-2xl">
+          <h1 className="text-4xl min-[400px]:text-5xl sm:text-[5rem] md:text-8xl lg:text-[11rem] xl:text-[13rem] font-black tracking-tighter leading-[0.85] mb-8 md:mb-12 uppercase drop-shadow-2xl whitespace-nowrap w-full overflow-hidden text-ellipsis">
             BOOKIDAM<span className="text-primary-500">.</span>
           </h1>
         </motion.div>
