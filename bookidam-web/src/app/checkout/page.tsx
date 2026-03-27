@@ -274,7 +274,7 @@ function CheckoutContent() {
 
               <div className="flex items-center justify-between py-6 border-t border-gray-100 dark:border-gray-800 mb-8">
                 <span className="text-xl font-black uppercase text-gray-900 dark:text-white">Total Checkout</span>
-                <span className="text-4xl font-black text-[#00A372]">${price}</span>
+                <span className="text-4xl font-black text-[#00A372]">₹{price}</span>
               </div>
 
               {price > 0 && (

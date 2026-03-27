@@ -46,6 +46,7 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
     const rawPrice = evt.price || evt.ticketPrice || evt.singleDayPrice || parseFloat(evt.budget) || 0;
     return {
       ...evt,
+      title: evt.title || evt.event_name || "Untitled Event",
       imageUrl: evt.imageUrl || evt.image_url || evt.image || "",
       startDate: rawDate,
       endDate: rawEndDate,
@@ -199,7 +200,7 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
                     <div>
                       <p className="text-[11px] text-gray-400 font-medium uppercase tracking-wider mb-0.5">From</p>
                       <p className="text-2xl font-black text-gray-900">
-                        ${startingPrice > 0 ? startingPrice : "—"}
+                        ₹{startingPrice > 0 ? startingPrice : "—"}
                         <span className="text-sm font-semibold text-gray-400"> / slot</span>
                       </p>
                     </div>
@@ -290,14 +291,14 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
                         className={`p-4 rounded-2xl border-2 flex flex-col items-start gap-1 transition-all focus:outline-none ${bookingType === "single" ? "border-[#00A372] bg-[#00A372]/5" : "border-gray-200 hover:border-gray-300"}`}
                       >
                         <span className="font-bold text-eventry-dark uppercase text-left text-sm">Single Day / Slot</span>
-                        <span className="text-xl font-black text-[#00A372]">from ${getStartingPrice(selectedEvent)}</span>
+                        <span className="text-xl font-black text-[#00A372]">from ₹{getStartingPrice(selectedEvent)}</span>
                       </button>
                       <button
                         onClick={() => setBookingType("full")}
                         className={`p-4 rounded-2xl border-2 flex flex-col items-start gap-1 transition-all focus:outline-none ${bookingType === "full" ? "border-eventry-dark bg-eventry-dark/5" : "border-gray-200 hover:border-gray-300"}`}
                       >
                         <span className="font-bold text-eventry-dark uppercase text-left text-sm">Full Event Pass</span>
-                        <span className="text-xl font-black text-eventry-dark">${selectedEvent.fullEventPrice}</span>
+                        <span className="text-xl font-black text-eventry-dark">₹{selectedEvent.fullEventPrice}</span>
                       </button>
                     </div>
                   ) : (
@@ -346,7 +347,7 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
                                 <span className="font-bold text-eventry-dark text-xs">{slot.name}</span>
                                 <div className="flex justify-between w-full items-center">
                                   <span className="text-[10px] text-gray-500 lowercase normal-case tracking-normal">{slot.time}</span>
-                                  <span className="font-black text-[#00A372] text-sm">${slot.price}</span>
+                                  <span className="font-black text-[#00A372] text-sm">₹{slot.price}</span>
                                 </div>
                               </button>
                             ))}
@@ -364,7 +365,7 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
                 <div className="pt-4 border-t border-gray-100 flex flex-col gap-4">
                   <div className="flex justify-between items-center text-xl font-black uppercase text-eventry-dark">
                     <span>Total Price:</span>
-                    <span className="text-3xl text-[#00A372]">${currentPrice}</span>
+                    <span className="text-3xl text-[#00A372]">₹{currentPrice}</span>
                   </div>
                   <button
                     onClick={() => {
