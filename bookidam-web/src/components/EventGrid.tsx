@@ -44,7 +44,7 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
     const rawPrice = evt.price || evt.ticketPrice || evt.singleDayPrice || 0;
     return {
       ...evt,
-      imageUrl: evt.imageUrl || evt.image || "",
+      imageUrl: evt.imageUrl || evt.image_url || evt.image || "",
       startDate: rawDate,
       endDate: rawEndDate,
       singleDayPrice: rawPrice,
