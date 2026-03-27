@@ -35,6 +35,33 @@ module.exports = (pool) => {
             const sha256 = crypto.createHash('sha256').update(stringToSign).digest('hex');
             const checksum = `${sha256}###${SALT_INDEX}`;
 
+            // SIMULATION MODE
+            if (MERCHANT_ID === 'TESTMERCHANT' || !process.env.PHONEPE_MERCHANT_ID || process.env.SIMULATE_PAYMENTS === 'true') {
+                console.log(`[SIMULATION MODE] Bypassing PhonePe gateway. Marking ${booking_ref} as Confirmed...`);
+                
+                const updateRes = await pool.query(
+                    `UPDATE bookings SET status = $1 WHERE description LIKE $2 RETURNING *`,
+                    ['Confirmed', `%${booking_ref}%`]
+                );
+
+                if (updateRes.rows.length > 0) {
+                    const bookingDetails = updateRes.rows[0];
+                    await sendTicketEmail({
+                        client_name: bookingDetails.client_name,
+                        email: bookingDetails.email,
+                        event_name: bookingDetails.event_name,
+                        event_date: bookingDetails.event_date,
+                        preferred_time: bookingDetails.preferred_time,
+                        booking_ref: booking_ref,
+                    });
+                }
+
+                return res.json({ 
+                    success: true, 
+                    redirectUrl: `${process.env.FRONTEND_URL || 'https://bookidam-backend.vercel.app'}/checkout?success=true&bookingId=${booking_ref}` 
+                });
+            }
+
             // Make request to PhonePe
             // We use standard fetch API since Node 18+
             const response = await fetch(`${BASE_URL}/pg/v1/pay`, {
