@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, CheckCircle2, QrCode, CreditCard, User, Mail, Phone, Briefcase, Calendar, MapPin, Ticket } from "lucide-react";
 import QRCode from "react-qr-code";
 
-export default function CheckoutPage() {
+function CheckoutContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -344,5 +344,17 @@ export default function CheckoutPage() {
         </AnimatePresence>
       </div>
     </div>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-eventry-dark">
+        <div className="w-10 h-10 border-4 border-[#00A372]/20 border-t-[#00A372] rounded-full animate-spin"></div>
+      </div>
+    }>
+      <CheckoutContent />
+    </Suspense>
   );
 }
