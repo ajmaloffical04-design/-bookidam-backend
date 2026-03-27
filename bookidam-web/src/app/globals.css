@@ -24,11 +24,9 @@
   --foreground: #09090b;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--color-eventry-dark);
-    --foreground: #ffffff;
-  }
+:root[class~="dark"] {
+  --background: var(--color-eventry-dark);
+  --foreground: #ffffff;
 }
 
 html {

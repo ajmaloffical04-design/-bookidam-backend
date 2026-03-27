@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { User } from "@supabase/supabase-js";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -76,7 +77,8 @@ export default function Navbar() {
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 md:gap-4">
+          <ThemeToggle />
           <Link 
             href="/book" 
             className="px-6 py-2.5 bg-primary-500 text-white text-sm font-bold tracking-wide rounded-full hover:bg-primary-600 hover:-translate-y-0.5 transition-all shadow-md hover:shadow-primary-500/30"
