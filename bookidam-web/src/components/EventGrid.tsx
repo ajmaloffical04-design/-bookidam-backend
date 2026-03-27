@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, MapPin, X, Ticket, Clock, Star, ArrowUpRight, ArrowRight } from "lucide-react";
 import { useState } from "react";
@@ -38,6 +39,7 @@ const getDatesBetween = (start: string, end: string) => {
 };
 
 export default function EventGrid({ events, hideHeader = false }: { events: any[], hideHeader?: boolean }) {
+  const router = useRouter();
   const displayEvents = (events || []).map((evt, idx) => {
     const rawDate = evt.startDate || evt.date || evt.eventDate || evt.createdAt || "2026-01-01T00:00:00Z";
     const rawEndDate = evt.endDate || rawDate;
@@ -368,8 +370,8 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
                     onClick={() => {
                       const dateStr = bookingType === "full" ? formatDateDisplay(selectedEvent.startDate, selectedEvent.endDate) : formatDateDisplay(selectedDate, selectedDate);
                       const timeStr = bookingType === "full" ? "All times" : (selectedTimeSlot ? selectedTimeSlot.name : "Standard Entry");
-                      alert(`Booking Confirmed!\n\nEvent: ${selectedEvent.title}\nType: ${bookingType === "full" ? 'Full Event Pass' : 'Single Day'}\nDate: ${dateStr}\nSlot: ${timeStr}\nTotal: $${currentPrice}`);
-                      closeModal();
+                      const checkoutUrl = `/checkout?eventId=${selectedEvent.id}&type=${bookingType}&date=${encodeURIComponent(dateStr)}&slot=${encodeURIComponent(timeStr)}&price=${currentPrice}`;
+                      router.push(checkoutUrl);
                     }}
                     className="w-full py-5 bg-[#0D1B1B] text-white rounded-2xl font-bold uppercase tracking-widest hover:bg-[#00A372] transition-colors flex items-center justify-center gap-2 shadow-xl"
                   >

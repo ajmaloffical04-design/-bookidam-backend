@@ -60,10 +60,12 @@ pool.connect((err, client, release) => {
 // Import routes and pass the pool
 const eventRoutes = require('./routes/events')(pool);
 const bookingRoutes = require('./routes/bookings')(pool);
+const paymentRoutes = require('./routes/payments')(pool);
 
 // Use routes
 app.use('/api/events', eventRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/payments', paymentRoutes);
 
 app.get('/', (req, res) => {
     res.send('BOOKIDAM API is running');
