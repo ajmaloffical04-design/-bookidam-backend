@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import html2canvas from "html2canvas";
 import { supabase } from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, CheckCircle2, QrCode, CreditCard, User, Mail, Phone, Briefcase, Calendar, MapPin, Ticket } from "lucide-react";
@@ -23,6 +24,21 @@ function CheckoutContent() {
   const [step, setStep] = useState(isSuccessRedirect ? 3 : 1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingId, setBookingId] = useState(redirectBookingId || "");
+  const ticketRef = useRef<HTMLDivElement>(null);
+
+  const handleDownloadTicket = async () => {
+    if (!ticketRef.current) return;
+    try {
+      const canvas = await html2canvas(ticketRef.current, { scale: 2, backgroundColor: '#ffffff' });
+      const image = canvas.toDataURL("image/png", 1.0);
+      const link = document.createElement("a");
+      link.href = image;
+      link.download = `${bookingId}_ticket.png`;
+      link.click();
+    } catch (err) {
+      console.error("Error generating ticket:", err);
+    }
+  };
 
   const [formData, setFormData] = useState({
     name: "",
@@ -92,7 +108,7 @@ function CheckoutContent() {
       
       if (price > 0) {
           // Initialize PhonePe Payment
-          const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000').replace(/\/$/, '');
+          const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'https://bookidam-backend.vercel.app').replace(/\/$/, '');
           const res = await fetch(`${apiUrl}/api/payments/create`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -116,7 +132,7 @@ function CheckoutContent() {
           }
       } else {
           // Free event: Send email directly
-          const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000').replace(/\/$/, '');
+          const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'https://bookidam-backend.vercel.app').replace(/\/$/, '');
           fetch(`${apiUrl}/api/payments/send-ticket`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -297,7 +313,7 @@ function CheckoutContent() {
                 </p>
 
                 {/* TICKET UI */}
-                <div className="relative bg-gray-50 dark:bg-gray-800 rounded-[2rem] border-2 border-dashed border-[#00A372]/30 p-8 max-w-sm mx-auto mb-10 overflow-hidden shadow-inner">
+                <div ref={ticketRef} className="relative bg-gray-50 dark:bg-gray-800 rounded-[2rem] border-2 border-dashed border-[#00A372]/30 p-8 max-w-sm mx-auto mb-10 overflow-hidden shadow-inner">
                   {/* Decorative Ticket Cutouts */}
                   <div className="absolute top-1/2 -left-4 w-8 h-8 bg-white dark:bg-gray-900 rounded-full -translate-y-1/2"></div>
                   <div className="absolute top-1/2 -right-4 w-8 h-8 bg-white dark:bg-gray-900 rounded-full -translate-y-1/2"></div>
@@ -330,8 +346,8 @@ function CheckoutContent() {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button className="px-8 py-4 bg-[#00A372] text-white font-bold rounded-2xl shadow-lg hover:bg-[#008f63] transition-colors flex justify-center items-center gap-2 uppercase tracking-wide">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+                  <button onClick={handleDownloadTicket} className="px-8 py-4 bg-[#00A372] text-white font-bold rounded-2xl shadow-lg hover:bg-[#008f63] transition-colors flex justify-center items-center gap-2 uppercase tracking-wide">
                     <QrCode size={18} /> Download Ticket
                   </button>
                   <button onClick={() => router.push('/events')} className="px-8 py-4 bg-gray-100 text-gray-800 font-bold rounded-2xl hover:bg-gray-200 transition-colors uppercase tracking-wide">
