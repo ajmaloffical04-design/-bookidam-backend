@@ -42,7 +42,9 @@ export default function Navbar() {
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-1">
-          <span className="text-2xl font-black tracking-tighter text-eventry-dark">
+          <span className={`text-2xl font-black tracking-tighter transition-colors ${
+            isScrolled ? "text-eventry-dark dark:text-white" : "text-white"
+          }`}>
             BOOKIDAM
           </span>
           <span className="text-primary-500 text-2xl leading-none">®</span>
@@ -59,7 +61,7 @@ export default function Navbar() {
               key={link.label}
               href={link.href} 
               className={`text-xs font-bold tracking-wider hover:text-primary-500 transition-colors uppercase ${
-                pathname === link.href ? "text-primary-500" : "text-eventry-dark"
+                pathname === link.href ? "text-primary-500" : (isScrolled ? "text-eventry-dark dark:text-white/70" : "text-white/90")
               }`}
             >
               {link.label}
@@ -68,7 +70,7 @@ export default function Navbar() {
           <Link 
             href={user ? "/profile" : "/login"}
             className={`text-xs font-bold tracking-wider hover:text-primary-500 transition-colors uppercase ${
-              pathname === "/login" || pathname === "/profile" ? "text-primary-500" : "text-eventry-dark"
+              pathname === "/login" || pathname === "/profile" ? "text-primary-500" : (isScrolled ? "text-eventry-dark dark:text-white/70" : "text-white/90")
             }`}
           >
             {user ? "PROFILE" : "LOGIN"}
@@ -86,7 +88,9 @@ export default function Navbar() {
           {user && (
             <button 
               onClick={async () => { await supabase.auth.signOut(); }}
-              className="hidden md:block text-xs font-bold tracking-wider text-gray-500 hover:text-red-500 transition-colors uppercase"
+              className={`hidden md:block text-xs font-bold tracking-wider transition-colors uppercase ${
+                isScrolled ? "text-gray-500 hover:text-red-500" : "text-white/60 hover:text-red-400"
+              }`}
             >
               Log Out
             </button>

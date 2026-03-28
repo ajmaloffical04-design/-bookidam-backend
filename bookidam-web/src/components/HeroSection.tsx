@@ -114,7 +114,7 @@ export default function HeroSection() {
                 </motion.p>
               </AnimatePresence>
             </div>
-            <p className="text-sm font-bold opacity-40 mt-8 tracking-widest uppercase relative z-10">Curated Event Experiences</p>
+            <p className="text-sm font-bold opacity-60 mt-8 tracking-widest uppercase relative z-10">Curated Event Experiences</p>
           </div>
 
           <div className="flex flex-col items-center lg:items-end gap-6 lg:gap-8 w-full lg:w-auto">

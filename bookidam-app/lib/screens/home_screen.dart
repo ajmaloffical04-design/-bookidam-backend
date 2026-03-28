@@ -52,15 +52,50 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Welcome to', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppTheme.textLightColor)),
-                          Text('BOOKIDAM', style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 28, color: AppTheme.primaryBlue, letterSpacing: -0.5)),
+                          Text('BOOKIDAM', style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 32, color: AppTheme.primaryBlue)),
                         ],
                       ),
-                      const CircleAvatar(
-                        radius: 22,
-                        backgroundColor: AppTheme.accentLightBlue,
-                        child: Icon(Icons.person, color: AppTheme.primaryBlue),
+                      Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: AppTheme.primaryBlue.withOpacity(0.2)),
+                        ),
+                        child: const CircleAvatar(
+                          radius: 22,
+                          backgroundColor: AppTheme.accentLightBlue,
+                          child: Icon(Icons.person_rounded, color: AppTheme.primaryBlue),
+                        ),
                       )
                     ],
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Premium Search Bar (Glass)
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.black.withOpacity(0.05)),
+                        ),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Search exclusive events...',
+                            prefixIcon: const Icon(Icons.search_rounded, color: AppTheme.primaryBlue),
+                            fillColor: Colors.transparent,
+                            filled: true,
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 32),
 
@@ -105,6 +140,26 @@ class _HomeScreenState extends State<HomeScreen> {
                             )
                           ],
                         ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 32),
+                  
+                  // Category Filter Chips (Liquid Glass style)
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Row(
+                        children: [
+                          _buildCategoryChip('All Events', true),
+                          _buildCategoryChip('Music', false),
+                          _buildCategoryChip('Corporate', false),
+                          _buildCategoryChip('Technology', false),
+                          _buildCategoryChip('Seminars', false),
+                        ],
                       ),
                     ),
                   ),
@@ -236,6 +291,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
+          ),
+        ),
+    );
+  }
+
+  Widget _buildCategoryChip(String label, bool isSelected) {
+    return Container(
+      margin: const EdgeInsets.only(right: 12),
+      child: Chip(
+        label: Text(label),
+        labelStyle: TextStyle(
+          color: isSelected ? Colors.white : AppTheme.textColor,
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+          fontSize: 12,
+        ),
+        backgroundColor: isSelected ? AppTheme.primaryBlue : Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
+          borderSide: BorderSide(
+            color: isSelected ? AppTheme.primaryBlue : Colors.black.withOpacity(0.05),
           ),
         ),
       ),

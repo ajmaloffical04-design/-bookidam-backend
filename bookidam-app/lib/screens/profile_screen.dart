@@ -92,13 +92,13 @@ class ProfileScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 24),
-                        const Text(
+                        Text(
                           'John Doe',
-                          style: TextStyle(
+                          style: GoogleFonts.outfit(
                             color: Colors.white,
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: -0.5,
+                            fontSize: 36,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: -1.0,
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -109,13 +109,13 @@ class ProfileScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(100),
                             border: Border.all(color: const Color(0xFF00A372).withOpacity(0.2)),
                           ),
-                          child: const Text(
+                          child: Text(
                             'PREMIUM MEMBER',
-                            style: TextStyle(
-                              color: Color(0xFF00A372),
+                            style: GoogleFonts.outfit(
+                              color: AppTheme.primaryTeal,
                               fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.2,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 2.0,
                             ),
                           ),
                         ),
@@ -158,9 +158,9 @@ class ProfileScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                               Text(
                                 'Account Settings',
-                                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                                style: GoogleFonts.outfit(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900),
                               ),
                               const SizedBox(height: 16),
                               _buildSettingItem(Icons.person_outline, 'Personal Information', Colors.blue),
@@ -175,22 +175,20 @@ class ProfileScreen extends StatelessWidget {
                               ),
 
                               // Logout Button
-                              SliverToBoxAdapter(
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  height: 60,
-                                  child: TextButton.icon(
-                                    onPressed: () {
-                                      // Logout logic
-                                    },
-                                    style: TextButton.styleFrom(
-                                      backgroundColor: Colors.redAccent.withOpacity(0.1),
-                                      foregroundColor: Colors.redAccent,
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                                    ),
-                                    icon: const Icon(Icons.logout_rounded),
-                                    label: const Text('Sign Out', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                              SizedBox(
+                                width: double.infinity,
+                                height: 60,
+                                child: TextButton.icon(
+                                  onPressed: () {
+                                    // Logout logic
+                                  },
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: Colors.redAccent.withOpacity(0.1),
+                                    foregroundColor: Colors.redAccent,
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                                   ),
+                                  icon: const Icon(Icons.logout_rounded),
+                                  label: Text('Sign Out', style: GoogleFonts.outfit(fontWeight: FontWeight.bold, fontSize: 16)),
                                 ),
                               ),
                             ],
@@ -219,9 +217,9 @@ class ProfileScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(value, style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
+            Text(value, style: GoogleFonts.outfit(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w900, letterSpacing: -1)),
             const SizedBox(height: 4),
-            Text(label, style: const TextStyle(color: Colors.white38, fontSize: 12)),
+            Text(label, style: GoogleFonts.instrumentSans(color: Colors.white38, fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 1)),
           ],
         ),
       ),
@@ -254,7 +252,7 @@ class ProfileScreen extends StatelessWidget {
               Expanded(
                 child: Text(
                   label,
-                  style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
+                  style: GoogleFonts.instrumentSans(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
                 ),
               ),
               const Icon(Icons.chevron_right_rounded, color: Colors.white24),

@@ -104,7 +104,7 @@ class _BookingScreenState extends State<BookingScreen> {
               SizedBox(height: 16),
               Text('Booking Received!', 
                 textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)
+                style: GoogleFonts.outfit(fontWeight: FontWeight.w900, fontSize: 24, color: AppTheme.textColor)
               ),
             ],
           ),
@@ -123,8 +123,8 @@ class _BookingScreenState extends State<BookingScreen> {
                     _formKey.currentState!.reset();
                     _clearControllers();
                   },
-                  child: const Text('Great!', 
-                    style: TextStyle(color: Color(0xFF00A372), fontWeight: FontWeight.bold, fontSize: 18)
+                  child: Text('Great!', 
+                    style: GoogleFonts.outfit(color: AppTheme.primaryTeal, fontWeight: FontWeight.w900, fontSize: 18)
                   ),
                 ),
               ),
@@ -202,33 +202,34 @@ class _BookingScreenState extends State<BookingScreen> {
                               SizedBox(width: 8),
                               Text(
                                 'PREMIUM CONCIERGE',
-                                style: TextStyle(
-                                  color: Color(0xFF00A372),
+                                style: GoogleFonts.outfit(
+                                  color: AppTheme.primaryTeal,
                                   fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1.2,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 2.0,
                                 ),
                               ),
                             ],
                           ),
                         ),
                         const SizedBox(height: 24),
-                        const Text(
+                        Text(
                           'Plan Your\nDream Event',
-                          style: TextStyle(
+                          style: GoogleFonts.outfit(
                             color: Colors.white,
-                            fontSize: 36,
-                            fontWeight: FontWeight.bold,
-                            height: 1.1,
+                            fontSize: 42,
+                            fontWeight: FontWeight.w900,
+                            height: 0.95,
+                            letterSpacing: -1,
                           ),
                         ),
                         const SizedBox(height: 16),
-                        const Text(
+                        Text(
                           'Tell us your vision, and we\'ll handle the venues, vendors, and vibes.',
-                          style: TextStyle(
+                          style: GoogleFonts.instrumentSans(
                             color: Colors.white70,
                             fontSize: 16,
-                            fontWeight: FontWeight.w300,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ],
