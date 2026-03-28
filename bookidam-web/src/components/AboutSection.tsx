@@ -26,8 +26,7 @@ export default function AboutSection() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="mb-20 text-center"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-xs font-black tracking-[0.3em] uppercase border border-primary-500/20 mb-8">
-            <Sparkles size={14} />
+          <div className="inline-flex items-center px-6 py-2 rounded-full bg-white/40 dark:bg-primary-500/5 backdrop-blur-md text-primary-600 dark:text-primary-400 text-[10px] font-black tracking-[0.4em] uppercase border border-primary-500/20 mb-8 shadow-sm">
             Everything you need
           </div>
           <h2 className="text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tighter text-eventry-dark dark:text-white max-w-5xl leading-[0.95] text-balance">
