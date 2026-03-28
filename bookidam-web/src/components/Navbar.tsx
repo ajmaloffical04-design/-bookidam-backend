@@ -34,10 +34,10 @@ export default function Navbar() {
   return (
     <header className="fixed top-4 md:top-6 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
       <div 
-        className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl rounded-full px-6 py-3 transition-all duration-300 ${
+        className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl rounded-full px-6 py-3 transition-all duration-500 border ${
           isScrolled 
-            ? "bg-white/95 backdrop-blur-md shadow-2xl border border-gray-100" 
-            : "bg-white shadow-xl"
+            ? "bg-white/70 dark:bg-black/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(31,38,135,0.15)] border-white/60 dark:border-white/10" 
+            : "bg-white/40 dark:bg-black/20 backdrop-blur-lg shadow-lg border-white/20 dark:border-white/5"
         }`}
       >
         {/* Logo */}
