@@ -1,101 +1,94 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { ArrowRight, Mail, Phone, Calendar, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export default function PricingSection() {
-  const tiers = [
-    {
-      name: "STANDARD",
-      price: "$149",
-      features: ["Standard Entry", "Access to Main Stage", "Free Soft Drinks", "Event Souvenir"],
-      highlight: false
-    },
-    {
-      name: "VIP ACCESS",
-      price: "$399",
-      features: ["Front Row Seating", "Backstage Pass", "Gourmet Lunch", "Priority Parking", "Networking Lounge"],
-      highlight: true
-    },
-    {
-      name: "PREMIUM",
-      price: "$249",
-      features: ["Reserved Seating", "Speaker Meet & Greet", "Workshop Access", "Digital Materials"],
-      highlight: false
-    }
-  ];
-
   return (
-    <section className="w-full bg-white py-24 md:py-32 px-6 lg:px-12">
-      <div className="max-w-7xl mx-auto flex flex-col">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+    <section className="w-full bg-white dark:bg-eventry-dark py-24 md:py-32 px-6 lg:px-12 transition-all duration-500 overflow-hidden relative">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          {/* Text Content */}
           <motion.div 
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            className="max-w-2xl"
           >
-            <p className="text-[#00A372] font-bold tracking-[0.2em] text-sm uppercase mb-4">Choose your style</p>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tight text-eventry-dark uppercase">Pricing Plans</h2>
-          </motion.div>
-          <motion.p 
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="text-gray-500 font-medium max-w-sm"
-          >
-            We offer flexible pricing options to suit your needs, whether you're a solo attendee or a large corporate team.
-          </motion.p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {tiers.map((tier, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className={`p-10 rounded-[3rem] border flex flex-col transition-all duration-500 ${
-                tier.highlight 
-                  ? "bg-eventry-dark text-white border-eventry-dark shadow-2xl scale-105" 
-                  : "bg-transparent text-eventry-dark border-gray-100 hover:border-gray-200"
-              }`}
-            >
-              <p className={`font-black text-xs tracking-[0.3em] uppercase mb-8 ${tier.highlight ? "text-[#00A372]" : "text-gray-400"}`}>
-                {tier.name}
-              </p>
-              
-              <div className="flex items-baseline gap-2 mb-10">
-                <span className="text-5xl md:text-6xl font-black tracking-tighter">{tier.price}</span>
-                <span className={`text-sm font-bold uppercase tracking-widest ${tier.highlight ? "text-gray-400" : "text-gray-400"}`}>/ TICKET</span>
-              </div>
-
-              <div className="space-y-4 mb-12">
-                {tier.features.map((feature, j) => (
-                  <div key={j} className="flex items-center gap-3">
-                    <div className="p-1 rounded-full bg-[#00A372]/10">
-                      <Check size={14} className="text-[#00A372]" />
-                    </div>
-                    <span className={`text-sm font-bold tracking-wide ${tier.highlight ? "text-gray-200" : "text-gray-600"}`}>
-                      {feature}
-                    </span>
+            <p className="text-[#00A372] font-black tracking-[0.4em] text-xs uppercase mb-8">Ready to Scale?</p>
+            <h2 className="text-4xl md:text-7xl font-black tracking-tighter text-eventry-dark dark:text-white uppercase leading-[0.9] mb-10">
+              Plan your next <span className="text-primary-500 underline underline-offset-8 decoration-primary-500/20">Elite Event</span> with us<span className="text-primary-500">.</span>
+            </h2>
+            <p className="text-lg md:text-xl text-gray-500 dark:text-gray-300 font-medium leading-relaxed mb-12 max-w-lg">
+              We've moved away from rigid tiers. Every event is unique, and we provide bespoke service tailored to your specific vision, scale, and corporate requirements.
+            </p>
+            
+            <div className="flex flex-wrap gap-8">
+               <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 shadow-sm border border-primary-500/10"><Sparkles size={24} /></div>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-black text-eventry-dark dark:text-white uppercase tracking-tight leading-none mb-1">Bespoke Experience</span>
+                    <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest">Custom Tailored</span>
                   </div>
-                ))}
-              </div>
+               </div>
+               <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500 shadow-sm border border-blue-500/10"><Calendar size={24} /></div>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-black text-eventry-dark dark:text-white uppercase tracking-tight leading-none mb-1">Full Lifecycle</span>
+                    <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest">End-to-End Planning</span>
+                  </div>
+               </div>
+            </div>
+          </motion.div>
 
-              <button 
-                className={`mt-auto w-full py-5 rounded-2xl font-black text-xs tracking-widest uppercase transition-all duration-300 ${
-                  tier.highlight 
-                    ? "bg-[#00A372] text-white hover:bg-[#00825e] shadow-xl shadow-primary-500/20" 
-                    : "bg-eventry-dark text-white hover:bg-black"
-                }`}
-              >
-                Choose plan
-              </button>
-            </motion.div>
-          ))}
+          {/* Contact Card */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", damping: 20 }}
+            className="relative p-10 md:p-16 rounded-[4rem] bg-[#0D1B1B] dark:bg-white/5 border border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden group"
+          >
+            <div className="absolute -top-32 -right-32 w-80 h-80 bg-primary-500/20 rounded-full blur-[100px] group-hover:bg-primary-500/30 transition-all duration-700"></div>
+            <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-blue-500/10 rounded-full blur-[100px] group-hover:bg-blue-500/20 transition-all duration-700"></div>
+            
+            <div className="relative z-10 flex flex-col items-center text-center">
+               <motion.div 
+                 whileHover={{ scale: 1.1, rotate: 12 }}
+                 className="w-24 h-24 rounded-3xl bg-primary-500 text-white flex items-center justify-center mb-10 shadow-2xl shadow-primary-500/30"
+               >
+                  <Mail size={36} />
+               </motion.div>
+               
+               <h3 className="text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter leading-none">Request a Custom Proposal</h3>
+               <p className="text-gray-400 dark:text-gray-300 font-medium mb-12 text-sm md:text-base text-balance lg:px-6 leading-relaxed">
+                  Join hundreds of top-tier organizers who trust BOOKIDAM for their most important summits. Get a personalized proposal within 24 hours.
+               </p>
+               
+               <div className="w-full flex flex-col gap-4">
+                  <Link 
+                    href="/contact" 
+                    className="group flex items-center justify-center gap-3 w-full py-6 bg-primary-500 hover:bg-primary-600 text-white rounded-2xl font-black text-xs md:text-sm uppercase tracking-[0.2em] transition-all shadow-xl shadow-primary-500/20 active:scale-98"
+                  >
+                    Connect with Sales <ArrowRight size={20} className="group-hover:translate-x-1.5 transition-transform" />
+                  </Link>
+                  <a 
+                    href="tel:+919876543210" 
+                    className="flex items-center justify-center gap-3 w-full py-6 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-2xl font-black text-xs md:text-sm uppercase tracking-[0.2em] transition-all"
+                  >
+                    <Phone size={18} /> Institutional Support
+                  </a>
+               </div>
+               
+               <p className="mt-10 text-[9px] font-black text-gray-500 uppercase tracking-[0.5em] opacity-60">Global Availability • Concierge Service</p>
+            </div>
+          </motion.div>
         </div>
       </div>
+      
+      {/* Background Decorative Blob */}
+      <div className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-primary-500/5 rounded-full blur-[120px] pointer-events-none -mb-24 -mr-24"></div>
     </section>
   );
 }

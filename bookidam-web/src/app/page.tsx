@@ -4,6 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import Marquee from "@/components/Marquee";
 import AboutSection from "@/components/AboutSection";
 import BookingFlow from "@/components/BookingFlow";
+import FeatureShowcase from "@/components/FeatureShowcase";
 import EventGrid from "@/components/EventGrid";
 import Testimonials from "@/components/Testimonials";
 import PricingSection from "@/components/PricingSection";
@@ -40,6 +41,7 @@ export default async function Home() {
       <HeroSection />
       <Marquee />
       <AboutSection />
+      <FeatureShowcase />
       <BookingFlow />
       <EventGrid events={events} />
       <Testimonials />
