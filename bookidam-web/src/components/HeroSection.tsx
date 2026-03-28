@@ -99,7 +99,7 @@ export default function HeroSection() {
           {/* Animated Services with Glass Effect */}
           <div className="flex flex-col text-left w-full lg:w-96 p-8 glass-card-dark border-white/5 hover:border-white/20 transition-all group overflow-hidden relative">
             <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <p className="text-[10px] font-black tracking-[0.3em] text-[#00A372] mb-6 uppercase relative z-10">OUR SERVICES</p>
+            <p className="text-[10px] font-black tracking-[0.3em] text-[#00A372] mb-6 uppercase relative z-10">WE ORGANIZING</p>
             <div className="relative h-20 flex items-center z-10">
               <AnimatePresence mode="wait">
                 <motion.p
