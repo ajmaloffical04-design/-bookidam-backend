@@ -6,6 +6,7 @@ import { Calendar } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import MobileFooter from "@/components/MobileFooter";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import PreloaderWrapper from "@/components/PreloaderWrapper";
 
 const instrumentSans = Instrument_Sans({
   variable: "--font-instrument-sans",
@@ -29,13 +30,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${instrumentSans.variable} ${outfit.variable} font-sans bg-background text-foreground min-h-screen flex flex-col antialiased pb-20 md:pb-0`}>
+      <body className={`${instrumentSans.variable} ${outfit.variable} font-sans bg-background text-foreground min-h-screen flex flex-col antialiased pb-20 md:pb-0 font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navbar />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <MobileFooter />
+          <PreloaderWrapper>
+            <Navbar />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <MobileFooter />
+          </PreloaderWrapper>
         </ThemeProvider>
       </body>
     </html>
