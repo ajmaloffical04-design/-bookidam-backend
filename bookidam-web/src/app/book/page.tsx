@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Sparkles, ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Sparkles, ArrowRight, CheckCircle2, ChevronRight, Upload, Loader2, Image as ImageIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -19,7 +19,9 @@ const formatDateToDDMMYYYY = (dateString: string) => {
 
 export default function BookEvent() {
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [success, setSuccess] = useState(false);
 
@@ -51,6 +53,43 @@ export default function BookEvent() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Optional: Add file size limit
+    if (file.size > 2 * 1024 * 1024) {
+      alert("File is too large. Please select an image smaller than 2MB.");
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
+      const filePath = `booking-refs/${fileName}`;
+
+      const { data, error } = await supabase.storage
+        .from('event-images')
+        .upload(filePath, file);
+
+      if (error) {
+        console.error("Upload error:", error);
+        throw new Error("Unable to upload image. Ensure 'event-images' bucket is public.");
+      }
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('event-images')
+        .getPublicUrl(filePath);
+
+      setFormData(prev => ({ ...prev, imageUrl: publicUrl }));
+    } catch (error: any) {
+      alert(error.message);
+    } finally {
+      setUploading(false);
+    }
   };
 
   const isMultiDay = formData.event_start_date && formData.event_end_date && formData.event_start_date !== formData.event_end_date;
@@ -271,15 +310,39 @@ ${formData.description}`
                     </div>
 
                     <div className="md:col-span-2 space-y-2">
-                      <label className="text-sm font-medium text-gray-700 dark:text-gray-300 ml-1">Event Reference Image URL</label>
-                      <input 
-                        type="url" 
-                        name="imageUrl" 
-                        value={formData.imageUrl} 
-                        onChange={handleChange} 
-                        placeholder="https://images.unsplash.com/your-image-url" 
-                        className="w-full px-6 py-4 bg-white/50 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500/50 transition-all font-light text-eventry-dark dark:text-white placeholder-gray-400" 
-                      />
+                      <label className="text-sm font-medium text-gray-700 dark:text-gray-300 ml-1">Event Reference Image</label>
+                      <div className="flex flex-col md:flex-row gap-4">
+                        <div className="flex-grow relative group">
+                          <input 
+                            type="url" 
+                            name="imageUrl" 
+                            value={formData.imageUrl} 
+                            onChange={handleChange} 
+                            placeholder="Paste image URL..." 
+                            className="w-full px-6 py-4 bg-white/50 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500/50 transition-all font-light text-eventry-dark dark:text-white placeholder-gray-400" 
+                          />
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 opacity-40 group-focus-within:opacity-100 transition-opacity">
+                            <ImageIcon size={18} />
+                          </div>
+                        </div>
+                        <button 
+                          type="button"
+                          onClick={() => fileInputRef.current?.click()}
+                          disabled={uploading}
+                          className="flex items-center justify-center gap-3 px-8 py-4 bg-[#0D1B1B] dark:bg-white text-white dark:text-[#0D1B1B] rounded-2xl font-bold uppercase tracking-wider text-xs hover:scale-[1.02] active:scale-98 transition-all disabled:opacity-50 shadow-xl"
+                        >
+                          {uploading ? <Loader2 size={18} className="animate-spin" /> : <Upload size={18} />}
+                          {uploading ? "Uploading..." : "Upload File"}
+                        </button>
+                        <input 
+                          type="file" 
+                          ref={fileInputRef} 
+                          onChange={handleFileUpload} 
+                          className="hidden" 
+                          accept="image/*" 
+                        />
+                      </div>
+                      <p className="text-[10px] text-gray-500 dark:text-gray-400 ml-2 italic tracking-tight">Paste a URL or upload a direct image from your device.</p>
                     </div>
 
                     {formData.imageUrl && (
