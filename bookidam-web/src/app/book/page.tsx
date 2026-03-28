@@ -271,6 +271,32 @@ ${formData.description}`
                     </div>
 
                     <div className="md:col-span-2 space-y-2">
+                      <label className="text-sm font-medium text-gray-700 dark:text-gray-300 ml-1">Event Reference Image URL</label>
+                      <input 
+                        type="url" 
+                        name="imageUrl" 
+                        value={formData.imageUrl} 
+                        onChange={handleChange} 
+                        placeholder="https://images.unsplash.com/your-image-url" 
+                        className="w-full px-6 py-4 bg-white/50 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500/50 transition-all font-light text-eventry-dark dark:text-white placeholder-gray-400" 
+                      />
+                    </div>
+
+                    {formData.imageUrl && (
+                      <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="md:col-span-2 rounded-2xl overflow-hidden border border-gray-100 dark:border-white/10 shadow-lg h-48 relative group">
+                        <img 
+                          src={formData.imageUrl} 
+                          alt="Preview" 
+                          className="w-full h-full object-cover" 
+                          onError={(e) => (e.currentTarget.style.display = 'none')} 
+                        />
+                        <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                          <span className="text-white text-xs font-bold uppercase tracking-widest">Image Preview</span>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    <div className="md:col-span-2 space-y-2">
                       <label className="text-sm font-medium text-gray-700 dark:text-gray-300 ml-1">Vision & Requirements</label>
                       <textarea rows={6} name="description" value={formData.description} onChange={handleChange} placeholder="Describe your dream event... Theme, guest count, catering needs, etc." className="w-full px-6 py-4 bg-white/50 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500/50 transition-all font-light resize-none text-eventry-dark dark:text-white placeholder-gray-400" />
                     </div>

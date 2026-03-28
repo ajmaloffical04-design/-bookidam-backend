@@ -163,8 +163,12 @@ export default function ProfilePage() {
                 >
                   <div className="relative z-10 flex items-center justify-between">
                     <div className="flex items-center gap-6">
-                      <div className="w-16 h-16 rounded-2xl bg-primary-500/10 text-primary-600 flex items-center justify-center font-bold text-xl">
-                        {idx + 1}
+                      <div className="w-16 h-16 rounded-2xl bg-primary-500/10 text-primary-600 flex items-center justify-center font-bold text-xl overflow-hidden border border-white/10">
+                        {booking.image_url ? (
+                          <img src={booking.image_url} alt="Booking" className="w-full h-full object-cover" />
+                        ) : (
+                          idx + 1
+                        )}
                       </div>
                       <div>
                         <h3 className="text-xl font-bold text-eventry-dark dark:text-white group-hover:text-primary-500 transition-colors">
