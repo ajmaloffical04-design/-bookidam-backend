@@ -45,7 +45,7 @@ export default function AboutSection() {
           <div className="flex-1 glass-card-light dark:glass-card-dark p-10 md:p-14 border-white/20 dark:border-white/5 flex flex-col justify-center relative overflow-hidden group">
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary-500/10 rounded-full blur-3xl group-hover:bg-primary-500/20 transition-colors"></div>
             <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed font-light relative z-10">
-              Whether you are organizing a massive music festival, a professional corporate summit, or an intimate gathering, we provide the tools to make it <span className="text-eventry-dark dark:text-white font-bold">unforgettable</span>.
+              Whether you are organizing high-end corporate summits, business functions, or exclusive tech gatherings, we provide the tools to make it <span className="text-eventry-dark dark:text-white font-bold">unforgettable</span>.
             </p>
           </div>
 
