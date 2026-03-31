@@ -40,14 +40,14 @@ export default function Navbar() {
             : "bg-white/40 dark:bg-black/20 backdrop-blur-lg shadow-lg border-white/20 dark:border-white/5"
         }`}
       >
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-1">
-          <span className={`text-2xl font-black tracking-tighter transition-colors ${
-            isScrolled ? "text-eventry-dark dark:text-white" : "text-white"
-          }`}>
-            BOOKIDAM
-          </span>
-          <span className="text-primary-500 text-2xl leading-none">®</span>
+        <Link href="/" className="flex items-center gap-1 group">
+          <div className="relative h-7 w-32 md:h-8 md:w-36 transition-transform duration-300 group-hover:scale-105">
+            <img 
+              src={isScrolled ? "/logo-dark.png" : "/logo-white.png"} 
+              alt="BOOKIDAM" 
+              className="w-full h-full object-contain transition-opacity duration-500"
+            />
+          </div>
         </Link>
 
         {/* Desktop Menu */}

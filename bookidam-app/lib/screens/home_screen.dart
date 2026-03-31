@@ -261,7 +261,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                             ),
-                                            const SizedBox(height: 12),
                                             Row(
                                               children: [
                                                 const Icon(Icons.location_on, size: 14, color: AppTheme.textLightColor),
@@ -273,6 +272,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     maxLines: 1,
                                                     overflow: TextOverflow.ellipsis,
                                                   ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 8),
+                                            Row(
+                                              children: [
+                                                const Icon(Icons.confirmation_num_outlined, size: 14, color: AppTheme.primaryBlue),
+                                                const SizedBox(width: 4),
+                                                Text(
+                                                  '₹${event.singleDayPrice ?? 0} / slot',
+                                                  style: const TextStyle(color: AppTheme.primaryBlue, fontSize: 13, fontWeight: FontWeight.bold),
                                                 ),
                                               ],
                                             ),

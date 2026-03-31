@@ -29,8 +29,14 @@ pool.connect((err, client, release) => {
                 date VARCHAR(100) NOT NULL,
                 location VARCHAR(255) NOT NULL,
                 description TEXT,
-                image_url TEXT
+                image_url TEXT,
+                single_day_price INTEGER DEFAULT 0
             );
+        `);
+
+        // Migration: ensure single_day_price exists
+        client.query(`
+            ALTER TABLE events ADD COLUMN IF NOT EXISTS single_day_price INTEGER DEFAULT 0;
         `);
 
         client.query(`

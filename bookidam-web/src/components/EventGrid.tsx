@@ -43,7 +43,7 @@ export default function EventGrid({ events, hideHeader = false }: { events: any[
   const displayEvents = (events || []).map((evt, idx) => {
     const rawDate = evt.startDate || evt.date || evt.eventDate || evt.createdAt || "2026-01-01T00:00:00Z";
     const rawEndDate = evt.endDate || rawDate;
-    const rawPrice = evt.price || evt.ticketPrice || evt.singleDayPrice || parseFloat(evt.budget) || 0;
+    const rawPrice = evt.price || evt.ticketPrice || evt.single_day_price || evt.singleDayPrice || parseFloat(evt.budget) || 0;
     return {
       ...evt,
       title: evt.title || evt.event_name || "Untitled Event",

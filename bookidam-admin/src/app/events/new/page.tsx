@@ -14,7 +14,8 @@ export default function NewEvent() {
     date: "",
     location: "",
     description: "",
-    imageUrl: ""
+    imageUrl: "",
+    singleDayPrice: 0
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -108,21 +109,20 @@ export default function NewEvent() {
                     />
                   </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">Location</label>
-                  <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
-                    <input 
-                      type="text" 
-                      name="location"
-                      required
-                      value={formData.location}
-                      onChange={handleChange}
-                      placeholder="City, Venue"
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-2">Price per Slot (₹)</label>
+                <input 
+                  type="number" 
+                  name="singleDayPrice"
+                  required
+                  value={formData.singleDayPrice}
+                  onChange={handleChange}
+                  placeholder="e.g. 500" 
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                />
               </div>
             </div>
 

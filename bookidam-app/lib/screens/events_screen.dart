@@ -184,11 +184,18 @@ class _EventsScreenState extends State<EventsScreen> {
                         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.textColor),
                       ),
                       const SizedBox(height: 8),
+                          Text(event.location, style: const TextStyle(color: AppTheme.textLightColor)),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
                       Row(
                         children: [
-                          const Icon(Icons.location_on, size: 16, color: AppTheme.textLightColor),
+                          const Icon(Icons.confirmation_num_outlined, size: 16, color: AppTheme.primaryBlue),
                           const SizedBox(width: 4),
-                          Text(event.location, style: const TextStyle(color: AppTheme.textLightColor)),
+                          Text(
+                            '₹${event.singleDayPrice ?? 0} / slot',
+                            style: const TextStyle(color: AppTheme.primaryBlue, fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
                         ],
                       ),
                     ],

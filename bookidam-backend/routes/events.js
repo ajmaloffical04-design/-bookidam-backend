@@ -15,7 +15,8 @@ module.exports = (pool) => {
                 date: r.date,
                 location: r.location,
                 description: r.description,
-                imageUrl: r.image_url
+                imageUrl: r.image_url,
+                singleDayPrice: r.single_day_price || 0
             }));
             
             res.json({
@@ -29,17 +30,17 @@ module.exports = (pool) => {
 
     // Create a new event
     router.post('/', async (req, res) => {
-        const { title, type, date, location, description, imageUrl } = req.body;
+        const { title, type, date, location, description, imageUrl, singleDayPrice } = req.body;
         
         try {
             const result = await pool.query(
-                `INSERT INTO events (title, type, date, location, description, image_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`,
-                [title, type, date, location, description, imageUrl || ""]
+                `INSERT INTO events (title, type, date, location, description, image_url, single_day_price) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`,
+                [title, type, date, location, description, imageUrl || "", singleDayPrice || 0]
             );
             
             res.json({
                 message: "success",
-                data: { id: result.rows[0].id, title, type, date, location, description, imageUrl }
+                data: { id: result.rows[0].id, title, type, date, location, description, imageUrl, singleDayPrice }
             });
         } catch (err) {
             res.status(400).json({ error: err.message });
