@@ -124,13 +124,13 @@ export default function HeroSection() {
 
             <Link href="/book" className="group relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
-              <button className="relative flex items-center overflow-hidden rounded-2xl bg-white text-eventry-dark font-bold transition-all duration-300 shadow-2xl hover:scale-[1.02] active:scale-[0.98]">
-                <span className="p-4 sm:p-5 bg-primary-500 text-white group-hover:bg-primary-600 transition-colors">
+              <button className="relative flex items-stretch overflow-hidden rounded-2xl bg-white text-eventry-dark font-bold transition-all duration-300 shadow-2xl hover:scale-[1.02] active:scale-[0.98]">
+                <span className="flex items-center justify-center p-4 sm:p-5 bg-primary-500 text-white group-hover:bg-primary-600 transition-colors">
                   <Ticket className="w-6 h-6 sm:w-7 sm:h-7" />
                 </span>
-                <span className="px-6 py-4 sm:px-8 sm:py-5 bg-white dark:bg-gray-900 dark:text-white transition-colors leading-tight text-left text-sm sm:text-base">
-                  Get your ticket<br />
-                  <span className="font-normal opacity-60 text-xs sm:text-sm italic tracking-tight underline decoration-primary-500/30">now for 50% off</span>
+                <span className="flex flex-col justify-center px-6 py-4 sm:px-8 sm:py-5 bg-white dark:bg-gray-900 dark:text-white transition-colors leading-tight text-left text-sm sm:text-base">
+                  <span className="block">Get your ticket</span>
+                  <span className="font-normal opacity-60 text-[10px] sm:text-xs italic tracking-tight block mt-0.5">now for 50% off</span>
                 </span>
               </button>
             </Link>

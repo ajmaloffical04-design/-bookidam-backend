@@ -3,13 +3,21 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 import { supabase } from "@/lib/supabase";
 import { User } from "@supabase/supabase-js";
+import { ThemeToggle } from "./ThemeToggle";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
   const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +51,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-1 group">
           <div className="relative h-7 w-32 md:h-8 md:w-36 transition-transform duration-300 group-hover:scale-105">
             <img 
-              src={isScrolled ? "/logo-dark.png" : "/logo-white.png"} 
+              src={(!mounted || theme === 'dark') ? "/logo-white.png" : (isScrolled ? "/logo-dark.png" : "/logo-white.png")} 
               alt="BOOKIDAM" 
               className="w-full h-full object-contain transition-opacity duration-500"
             />
@@ -79,6 +87,9 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="flex items-center gap-3 md:gap-4">
+          <div className="hidden sm:block">
+            <ThemeToggle />
+          </div>
           <Link 
             href="/book" 
             className="px-6 py-2.5 bg-primary-500 text-white text-sm font-bold tracking-wide rounded-full hover:bg-primary-600 hover:-translate-y-0.5 transition-all shadow-md hover:shadow-primary-500/30"
@@ -88,7 +99,7 @@ export default function Navbar() {
           {user && (
             <button 
               onClick={async () => { await supabase.auth.signOut(); }}
-              className={`hidden md:block text-xs font-bold tracking-wider transition-colors uppercase ${
+              className={`hidden md:block text-xs font-bold tracking-wider transition-colors uppercase ml-2 ${
                 isScrolled ? "text-gray-500 hover:text-red-500" : "text-white/60 hover:text-red-400"
               }`}
             >

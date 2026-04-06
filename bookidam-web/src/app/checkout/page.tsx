@@ -108,7 +108,7 @@ function CheckoutContent() {
       
       if (price > 0) {
           // Initialize PhonePe Payment
-          const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'https://bookidam-backend.vercel.app').replace(/\/$/, '');
+          const apiUrl = "";
           const res = await fetch(`${apiUrl}/api/payments/create`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -132,7 +132,7 @@ function CheckoutContent() {
           }
       } else {
           // Free event: Send email directly
-          const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'https://bookidam-backend.vercel.app').replace(/\/$/, '');
+          const apiUrl = "";
           fetch(`${apiUrl}/api/payments/send-ticket`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },

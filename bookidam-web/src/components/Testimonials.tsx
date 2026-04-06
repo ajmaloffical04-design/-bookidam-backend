@@ -57,7 +57,7 @@ export default function Testimonials() {
               <Quote size={40} className="text-[#00A372]/20 mb-6 group-hover:scale-110 transition-transform" />
               
               <p className="text-xl md:text-2xl font-bold text-eventry-dark leading-snug mb-8">
-                "{t.quote}"
+                &quot;{t.quote}&quot;
               </p>
 
               <div className="mt-auto flex flex-col items-center">

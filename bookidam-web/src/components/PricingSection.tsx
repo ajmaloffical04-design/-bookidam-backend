@@ -21,7 +21,7 @@ export default function PricingSection() {
               Plan your next <span className="text-primary-500 underline underline-offset-8 decoration-primary-500/20">Elite Event</span> with us<span className="text-primary-500">.</span>
             </h2>
             <p className="text-lg md:text-xl text-gray-500 dark:text-gray-300 font-medium leading-relaxed mb-12 max-w-lg">
-              We've moved away from rigid tiers. Every event is unique, and we provide bespoke service tailored to your specific vision, scale, and corporate requirements.
+              We&apos;ve moved away from rigid tiers. Every event is unique, and we provide bespoke service tailored to your specific vision, scale, and corporate requirements.
             </p>
             
             <div className="flex flex-wrap gap-8">

@@ -62,7 +62,7 @@ export default function FooterFAQ() {
               Book an<br/><span className="text-[#00A372]">Inquiry</span>
             </h2>
             <p className="text-gray-400 text-sm font-bold uppercase tracking-widest mb-10">
-              We're here to help you coordinate your vision.
+              We&apos;re here to help you coordinate your vision.
             </p>
             
             <div className="space-y-4">

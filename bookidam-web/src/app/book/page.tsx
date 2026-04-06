@@ -85,8 +85,9 @@ export default function BookEvent() {
         .getPublicUrl(filePath);
 
       setFormData(prev => ({ ...prev, imageUrl: publicUrl }));
-    } catch (error: any) {
-      alert(error.message);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+      alert(errorMessage);
     } finally {
       setUploading(false);
     }
@@ -192,7 +193,7 @@ ${formData.description}`
                 Plan Your <span className="text-primary-500">Dream</span> Event
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-light leading-relaxed">
-                Tell us your vision, and we'll handle the venues, vendors, and vibes. Your perfect event starts here.
+                Tell us your vision, and we&apos;ll handle the venues, vendors, and vibes. Your perfect event starts here.
               </p>
             </div>
 

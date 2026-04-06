@@ -1,0 +1,16 @@
+{
+  "projectId": "prj_zkB1HWrxTilQg0M8kx1oX6LFYjO4",
+  "orgId": "team_Varzt80u0lhBnyTqXNuasTmJ",
+  "projectName": "bookidam-backend",
+  "settings": {
+    "createdAt": 1773139642680,
+    "framework": "nextjs",
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rootDirectory": "bookidam-web",
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}
