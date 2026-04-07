@@ -16,8 +16,8 @@ const MobileFooter = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-6 md:hidden">
-      <div className="relative group overflow-hidden">
+    <div className="fixed bottom-0 left-0 right-0 z-[100] px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] md:hidden pointer-events-none">
+      <div className="relative group overflow-hidden pointer-events-auto">
         {/* Glow effect at the top */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[2px] bg-gradient-to-r from-transparent via-[#00A372]/50 to-transparent blur-[2px]" />
         
