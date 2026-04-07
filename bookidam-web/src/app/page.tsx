@@ -3,7 +3,6 @@ import { ArrowRight, MapPin, Calendar, Search, Sparkles } from "lucide-react";
 import HeroSection from "@/components/HeroSection";
 import Marquee from "@/components/Marquee";
 import AboutSection from "@/components/AboutSection";
-import BookingFlow from "@/components/BookingFlow";
 import EventGrid from "@/components/EventGrid";
 import Testimonials from "@/components/Testimonials";
 import PricingSection from "@/components/PricingSection";
@@ -40,7 +39,6 @@ export default async function Home() {
       <HeroSection />
       <Marquee />
       <AboutSection />
-      <BookingFlow />
       <EventGrid events={events} />
       <Testimonials />
       <PricingSection />

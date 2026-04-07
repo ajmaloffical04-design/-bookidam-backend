@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Outfit } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
@@ -7,16 +6,6 @@ import Navbar from "@/components/Navbar";
 import MobileFooter from "@/components/MobileFooter";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import PreloaderWrapper from "@/components/PreloaderWrapper";
-
-const instrumentSans = Instrument_Sans({
-  variable: "--font-instrument-sans",
-  subsets: ["latin"],
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "BOOKIDAM | Event & Programme Booking",
@@ -30,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${instrumentSans.variable} ${outfit.variable} font-sans bg-background text-foreground min-h-screen flex flex-col antialiased pb-20 md:pb-0 font-sans`}>
+      <body className="font-sans bg-background text-foreground min-h-screen flex flex-col antialiased pb-20 md:pb-0">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <PreloaderWrapper>
             <Navbar />
